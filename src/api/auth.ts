@@ -1,16 +1,4 @@
-interface TokenResponse {
-  status: string;
-  access_token: string;
-  refresh_token: string;
-  token_type: string;
-  expires_in: number; // Token expires in 3600 seconds (1 hour)
-}
-
-interface TokenData {
-  accessToken: string;
-  refreshToken: string;
-  expiresAt: number; // timestamp when token expires
-}
+import type { TokenResponse, TokenData, AuthRequest } from '@/types/auth';
 
 const TOKEN_STORAGE_KEY = 'tc_auth_token';
 
@@ -23,16 +11,6 @@ export class AuthService {
     this.baseURL = import.meta.env.VITE_API_BASE_URL;
     this.username = import.meta.env.VITE_API_USERNAME;
     this.password = import.meta.env.VITE_API_PASSWORD;
-
-    // Debug logging
-    console.log('Auth Service Config:');
-    console.log('Base URL:', this.baseURL);
-    console.log('Username:', this.username);
-    console.log('Password exists:', !!this.password);
-
-    if (!this.username || !this.password) {
-      console.error('Missing credentials! Check .env.local file');
-    }
   }
 
   /**
@@ -55,27 +33,21 @@ export class AuthService {
    */
   private async fetchNewToken(): Promise<string> {
     try {
-      console.log('🔐 Attempting authentication...');
-      console.log('URL:', `${this.baseURL}/oauthorize/token`);
-      console.log('Username:', this.username);
-
+      const requestBody: AuthRequest = {
+        grant_type: 'password',
+        username: this.username,
+        password: this.password,
+      };
       const response = await fetch(`${this.baseURL}/oauthorize/token`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          grant_type: 'password',
-          username: this.username,
-          password: this.password,
-        }),
+        body: JSON.stringify(requestBody),
       });
-
-      console.log('Auth response status:', response.status);
 
       if (!response.ok) {
         const errorBody = await response.text();
-        console.error('Auth failed:', errorBody);
 
         throw new Error(
           `Authentication failed: ${response.status} - ${errorBody}`
@@ -83,7 +55,6 @@ export class AuthService {
       }
 
       const data: TokenResponse = await response.json();
-      console.log('✅ Auth successful! Token received.');
 
       if (data.status !== 'success') {
         throw new Error('Authentication failed: Invalid response');
@@ -115,15 +86,16 @@ export class AuthService {
     }
 
     try {
+      const requestBody: AuthRequest = {
+        grant_type: 'refresh_token',
+        refresh_token: storedToken.refreshToken,
+      };
       const response = await fetch(`${this.baseURL}/oauthorize/token`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          grant_type: 'refresh_token',
-          refresh_token: storedToken.refreshToken,
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
