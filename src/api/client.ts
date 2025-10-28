@@ -1,5 +1,9 @@
 import { authService } from './auth';
 
+interface RequestConfig extends RequestInit {
+  params?: Record<string, unknown>;
+}
+
 class ApiClient {
   private baseURL: string;
 
@@ -7,21 +11,51 @@ class ApiClient {
     this.baseURL = import.meta.env.VITE_API_BASE_URL;
   }
 
+  /**
+   * Build URL with query parameters
+   */
+  private buildUrl(endpoint: string, params?: Record<string, unknown>): string {
+    const url = new URL(`${this.baseURL}${endpoint}`, window.location.origin);
+
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          // Handle page object specially for pagination
+          if (key === 'page' && typeof value === 'object') {
+            if (value.number)
+              url.searchParams.append('page[number]', String(value.number));
+            if (value.size)
+              url.searchParams.append('page[size]', String(value.size));
+          } else if (Array.isArray(value)) {
+            value.forEach((item) => url.searchParams.append(key, String(item)));
+          } else {
+            url.searchParams.append(key, String(value));
+          }
+        }
+      });
+    }
+
+    return url.pathname + url.search;
+  }
+
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestConfig = {}
   ): Promise<T> {
+    const { params, ...fetchOptions } = options;
+
     // Get a valid access token
     const accessToken = await authService.getAccessToken();
 
-    const url = `${this.baseURL}${endpoint}`;
+    // Build URL with params
+    const url = this.buildUrl(endpoint, params);
 
     const config: RequestInit = {
-      ...options,
+      ...fetchOptions,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
-        ...options.headers,
+        ...fetchOptions.headers,
       },
     };
 
@@ -71,26 +105,32 @@ class ApiClient {
     return response.json();
   }
 
-  async get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: 'GET' });
+  async get<T>(endpoint: string, options?: RequestConfig): Promise<T> {
+    return this.request<T>(endpoint, { ...options, method: 'GET' });
   }
 
-  async post<T>(endpoint: string, data: unknown): Promise<T> {
+  async post<T>(
+    endpoint: string,
+    data: unknown,
+    options?: RequestConfig
+  ): Promise<T> {
     return this.request<T>(endpoint, {
+      ...options,
       method: 'POST',
       body: JSON.stringify(data),
     });
   }
 
-  async put<T>(endpoint: string, data: unknown): Promise<T> {
+  async put<T>(
+    endpoint: string,
+    data: unknown,
+    options?: RequestConfig
+  ): Promise<T> {
     return this.request<T>(endpoint, {
+      ...options,
       method: 'PUT',
       body: JSON.stringify(data),
     });
-  }
-
-  async delete<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: 'DELETE' });
   }
 }
 

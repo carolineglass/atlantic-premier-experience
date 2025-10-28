@@ -4,6 +4,8 @@ import { useProducts } from './hooks/useProducts';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const {
     data: response,
     isLoading,
@@ -13,7 +15,19 @@ function App() {
       number: currentPage,
       size: 12,
     },
+    search: searchQuery || undefined,
   });
+
+  const handleSearch = () => {
+    setSearchQuery(searchInput);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   if (isLoading) {
     return <div className="p-8">Loading...</div>;
   }
@@ -28,7 +42,39 @@ function App() {
     <div>
       <header className="bg-white border-b p-4">
         <h1 className="text-2xl font-bold">Atlantic Premier Experience</h1>
-        <p className="text-gray-600">{response?.meta.total} total products</p>
+        {/* Search Bar */}
+        <div className="flex gap-2 max-w-md">
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Search products..."
+            className="flex-1 px-4 py-2 border rounded"
+          />
+          <button
+            onClick={handleSearch}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            🔍 Search
+          </button>
+          {searchQuery && (
+            <button
+              onClick={() => {
+                setSearchInput('');
+                setSearchQuery('');
+              }}
+              className="px-4 py-2 border rounded hover:bg-gray-100"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+
+        <p className="text-gray-600 mt-2">
+          {response?.meta.total} total products
+          {searchQuery && ` (searching for "${searchQuery}")`}
+        </p>
       </header>
 
       <ProductCards products={products} />

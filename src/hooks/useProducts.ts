@@ -8,7 +8,8 @@ import type { ProductsResponse, ProductQueryParams } from '@/types/product';
 export function useProducts(params?: ProductQueryParams) {
   return useQuery<ProductsResponse>({
     queryKey: ['products', params],
-    queryFn: () => apiClient.get('/product', { params }),
+    queryFn: () =>
+      apiClient.get('/product', { params: params as Record<string, unknown> }),
     staleTime: 2 * 60 * 1000, // 2 minutes
     retry: 1,
   });
