@@ -12,7 +12,8 @@ export function HomePage() {
       .filter(
         (product) =>
           product.match.status === 'Upcoming' &&
-          product.type === 'football_match'
+          product.type === 'football_match' &&
+          new Date(product.match.start.local) >= new Date()
       )
       .sort((a, b) => {
         // Sort by date (soonest first)
@@ -33,7 +34,7 @@ export function HomePage() {
       {/* Hero Section */}
       <section
         className="relative h-screen w-full bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: "url('public/images/hero/hero_image.png')" }}
+        style={{ backgroundImage: "url('/images/hero/hero_image.png')" }}
       >
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center text-white">

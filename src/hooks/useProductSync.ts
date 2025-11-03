@@ -45,13 +45,8 @@ export function useAutoProductSync() {
   const queryClient = useQueryClient();
   const syncIntervalRef = useRef<number | null>(null);
   const staticIntervalRef = useRef<number | null>(null);
-  const hasInitializedRef = useRef(false);
 
   useEffect(() => {
-    // Prevent double initialization in React strict mode
-    if (hasInitializedRef.current) return;
-    hasInitializedRef.current = true;
-
     console.log('Starting automatic sync schedule...');
 
     // Run initial sync if no products in localStorage
@@ -74,25 +69,31 @@ export function useAutoProductSync() {
     }
 
     // Product sync: Every hour (API recommendation)
-    syncIntervalRef.current = window.setInterval(() => {
-      console.log('Hourly product sync...');
-      ProductSync.syncProducts()
-        .then((result: SyncResult) => {
-          queryClient.setQueryData(['products'], result.products);
-          console.log('Scheduled sync complete:', result.message);
-        })
-        .catch((error: Error) => {
-          console.error('Scheduled product sync failed:', error);
-        });
-    }, 60 * 60 * 1000); // 1 hour
+    syncIntervalRef.current = window.setInterval(
+      () => {
+        console.log('Hourly product sync...');
+        ProductSync.syncProducts()
+          .then((result: SyncResult) => {
+            queryClient.setQueryData(['products'], result.products);
+            console.log('Scheduled sync complete:', result.message);
+          })
+          .catch((error: Error) => {
+            console.error('Scheduled product sync failed:', error);
+          });
+      },
+      60 * 60 * 1000
+    ); // 1 hour
 
     // Static data sync: Once per day (API recommendation)
-    staticIntervalRef.current = window.setInterval(() => {
-      console.log('Daily static data sync...');
-      ProductSync.syncStaticData().catch((error: Error) =>
-        console.error('Static data sync failed:', error)
-      );
-    }, 24 * 60 * 60 * 1000); // 24 hours
+    staticIntervalRef.current = window.setInterval(
+      () => {
+        console.log('Daily static data sync...');
+        ProductSync.syncStaticData().catch((error: Error) =>
+          console.error('Static data sync failed:', error)
+        );
+      },
+      24 * 60 * 60 * 1000
+    ); // 24 hours
 
     console.log('Auto-sync started (products: hourly, static data: daily)');
 
@@ -106,5 +107,5 @@ export function useAutoProductSync() {
       }
       console.log('Auto-sync stopped');
     };
-  }, [queryClient]);
+  }, []); // queryClient is stable, no need to include in deps
 }
