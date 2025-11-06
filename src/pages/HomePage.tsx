@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useStoredProducts } from '@/hooks/useProductSync';
+import { filterUpcomingMatches } from '@/utils/productFilters';
 import { EventCarousel } from '@/components/EventCarousel';
 import type { Product } from '@/types/product';
 
@@ -8,20 +9,13 @@ export function HomePage() {
 
   // Filter and sort upcoming matches
   const upcomingMatches = useMemo(() => {
-    return allProducts
-      .filter(
-        (product) =>
-          product.match.status === 'Upcoming' &&
-          product.type === 'football_match' &&
-          new Date(product.match.start.local) >= new Date()
-      )
-      .sort((a, b) => {
-        // Sort by date (soonest first)
-        return (
-          new Date(a.match.start.local).getTime() -
-          new Date(b.match.start.local).getTime()
-        );
-      });
+    return filterUpcomingMatches(allProducts).sort((a, b) => {
+      // Sort by date (soonest first)
+      return (
+        new Date(a.match.start.local).getTime() -
+        new Date(b.match.start.local).getTime()
+      );
+    });
   }, [allProducts]);
 
   const handleEventClick = (product: Product) => {

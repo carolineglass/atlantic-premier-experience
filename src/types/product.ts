@@ -150,3 +150,42 @@ export interface ProductQueryParams {
     size?: number;
   };
 }
+
+// INVENTORY STATUS RESPONSE (POST /inventory-status)
+
+export interface InventoryStatusRequest {
+  products: number[];
+}
+
+export interface InventoryStatusResponse {
+  data: ProductInventory[];
+}
+
+export interface ProductInventory {
+  id: number;
+  status: 'Expired' | 'Upcoming';
+  ticket_options: TicketOption[];
+}
+
+export interface TicketOption {
+  id: number;
+  ticket_category: number;
+  name: string;
+  price: number;
+  available: boolean;
+  max_purchase_qty: number;
+  delivery_methods: number[];
+}
+
+// Stored inventory map for quick lookups by product ID
+export interface InventoryMap {
+  [productId: number]: ProductInventory;
+}
+
+export interface InventorySyncResult {
+  success: boolean;
+  productsUpdated: number;
+  message: string;
+  timestamp: Date;
+  error?: string;
+}

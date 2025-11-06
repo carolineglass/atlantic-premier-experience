@@ -1,4 +1,5 @@
 import type { Product } from '@/types/product';
+import { useLowestPrice, useProductAvailability } from '@/hooks/useInventory';
 
 interface EventCardProps {
   product: Product;
@@ -17,6 +18,10 @@ export function EventCard({ product, onClick }: EventCardProps) {
     minute: '2-digit',
     hour12: true,
   });
+
+  // Get live pricing and availability
+  const { data: lowestPrice } = useLowestPrice(product.id);
+  const { data: isAvailable } = useProductAvailability(product.id);
 
   return (
     <div
@@ -60,19 +65,47 @@ export function EventCard({ product, onClick }: EventCardProps) {
           </span>
         </div>
 
+        {/* Price */}
+        {lowestPrice !== null && lowestPrice !== undefined && (
+          <div className="mb-3">
+            <p className="text-sm text-gray-600">From</p>
+            <p className="text-2xl font-bold text-gray-900">
+              £{lowestPrice.toFixed(2)}
+            </p>
+          </div>
+        )}
+
         {/* Status Badge */}
         {product.match.status === 'Upcoming' && (
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-green-600 font-medium">
-              Available Now
-            </span>
+            {isAvailable ? (
+              <>
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm text-green-600 font-medium">
+                  Available Now
+                </span>
+              </>
+            ) : (
+              <>
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <span className="text-sm text-red-600 font-medium">
+                  Sold Out
+                </span>
+              </>
+            )}
           </div>
         )}
 
         {/* CTA Button */}
-        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
-          View Tickets
+        <button
+          disabled={!isAvailable}
+          className={`w-full font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ${
+            isAvailable
+              ? 'bg-blue-600 hover:bg-blue-700 text-white'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
+        >
+          {isAvailable ? 'View Tickets' : 'Sold Out'}
         </button>
       </div>
     </div>
