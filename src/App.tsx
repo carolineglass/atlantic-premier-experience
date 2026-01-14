@@ -1,10 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAutoProductSync, useStoredProducts } from './hooks/useProductSync';
 import { useAutoInventorySync } from './hooks/useInventory';
+import { useStaticData } from './hooks/useStaticData';
 import { filterUpcomingMatches } from './utils/productFilters';
 import { HomePage } from './pages/HomePage';
+import { EventDetailPage } from './pages/EventDetailPage';
 
 function App() {
+  // Load static data (teams, venues, competitions) on app startup
+  useStaticData();
+
   // Start automatic background syncing for products (hourly)
   useAutoProductSync();
 
@@ -21,8 +26,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* Future routes */}
-        {/* <Route path="/event/:id" element={<EventDetailPage />} /> */}
+        <Route path="/event/:id" element={<EventDetailPage />} />
       </Routes>
     </BrowserRouter>
   );

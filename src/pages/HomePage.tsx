@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useStoredProducts } from '@/hooks/useProductSync';
 import { filterUpcomingMatches } from '@/utils/productFilters';
 import { EventCarousel } from '@/components/EventCarousel';
 import type { Product } from '@/types/product';
 
 export function HomePage() {
+  const navigate = useNavigate();
   const { data: allProducts = [] } = useStoredProducts();
 
   // Filter and sort upcoming matches
@@ -19,8 +21,7 @@ export function HomePage() {
   }, [allProducts]);
 
   const handleEventClick = (product: Product) => {
-    // TODO: Navigate to event detail page when routing is set up
-    console.log('Event clicked:', product.id, product.name);
+    navigate(`/event/${product.id}`);
   };
 
   return (

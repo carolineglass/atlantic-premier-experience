@@ -17,10 +17,14 @@ export function useInventory() {
 /**
  * Hook to get inventory for a specific product
  */
-export function useProductInventory(productId: number) {
+export function useProductInventory(productId: number | undefined) {
   return useQuery<ProductInventory | null>({
     queryKey: ['inventory', productId],
-    queryFn: () => InventorySync.getProductInventory(productId),
+    queryFn: () => {
+      if (!productId) return null;
+      return InventorySync.getProductInventory(productId);
+    },
+    enabled: productId !== undefined,
     staleTime: 60 * 1000, // Consider stale after 1 minute
   });
 }

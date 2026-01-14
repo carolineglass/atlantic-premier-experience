@@ -21,11 +21,12 @@ class ApiClient {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
           // Handle page object specially for pagination
-          if (key === 'page' && typeof value === 'object') {
-            if (value.number)
-              url.searchParams.append('page[number]', String(value.number));
-            if (value.size)
-              url.searchParams.append('page[size]', String(value.size));
+          if (key === 'page' && typeof value === 'object' && !Array.isArray(value)) {
+            const pageObj = value as { number?: number; size?: number };
+            if (pageObj.number)
+              url.searchParams.append('page[number]', String(pageObj.number));
+            if (pageObj.size)
+              url.searchParams.append('page[size]', String(pageObj.size));
           } else if (Array.isArray(value)) {
             value.forEach((item) => url.searchParams.append(key, String(item)));
           } else {
