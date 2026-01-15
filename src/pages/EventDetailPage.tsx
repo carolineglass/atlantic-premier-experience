@@ -7,6 +7,8 @@ import { useProductInventory } from '@/hooks/useInventory';
 export function EventDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  // Extract product ID from URL parameter (format: "/event/123/slug")
   const productId = id ? parseInt(id, 10) : undefined;
 
   const { data: product, isLoading: productLoading, error: productError } = useProductDetail(productId);
