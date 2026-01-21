@@ -1,9 +1,8 @@
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStoredProducts } from '@/hooks/useProductSync';
 import { filterUpcomingMatches } from '@/utils/productFilters';
 import { EventCarousel } from '@/components/EventCarousel';
-import { useVisibleProducts } from '@/contexts/VisibleProductsContext';
 import { useStaticData } from '@/hooks/useStaticData';
 import type { Product } from '@/types/product';
 
@@ -11,8 +10,8 @@ export function HomePage() {
   const navigate = useNavigate();
   const { data: allProducts = [] } = useStoredProducts();
   const { data: staticData } = useStaticData();
-  const { setVisibleProductIds } = useVisibleProducts();
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAllMatches, setShowAllMatches] = useState(false);
 
   // Filter and sort upcoming matches with search
   const upcomingMatches = useMemo(() => {
@@ -47,13 +46,10 @@ export function HomePage() {
     });
   }, [allProducts, searchQuery, staticData]);
 
-  // Update visible products for inventory sync optimization
-  // Takes first 20 products being displayed (covers initial view + some scrolling)
-  // When search is implemented, this will automatically sync search results
-  useEffect(() => {
-    const visibleIds = upcomingMatches.slice(0, 20).map((p) => p.id);
-    setVisibleProductIds(visibleIds);
-  }, [upcomingMatches, setVisibleProductIds]);
+  // Limit to first 20 for carousel, unless showing all or searching
+  const displayedMatches = searchQuery || showAllMatches
+    ? upcomingMatches
+    : upcomingMatches.slice(0, 20);
 
   const handleEventClick = (product: Product) => {
     // ID-first URL structure for unique, SEO-friendly URLs (e.g., "/event/123/manchester-united-v-liverpool")
@@ -113,12 +109,25 @@ export function HomePage() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         {/* Upcoming Matches Carousel */}
-        {upcomingMatches.length > 0 ? (
-          <EventCarousel
-            products={upcomingMatches}
-            title={searchQuery ? 'Search Results' : 'Upcoming Matches'}
-            onEventClick={handleEventClick}
-          />
+        {displayedMatches.length > 0 ? (
+          <>
+            <EventCarousel
+              products={displayedMatches}
+              title={searchQuery ? 'Search Results' : 'Upcoming Matches'}
+              onEventClick={handleEventClick}
+            />
+            {/* See All Button - only show if there are more than 20 matches and not already showing all */}
+            {!searchQuery && !showAllMatches && upcomingMatches.length > 20 && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setShowAllMatches(true)}
+                  className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md"
+                >
+                  See All {upcomingMatches.length} Matches
+                </button>
+              </div>
+            )}
+          </>
         ) : searchQuery ? (
           <div className="text-center py-12">
             <svg

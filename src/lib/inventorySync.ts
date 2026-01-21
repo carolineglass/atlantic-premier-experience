@@ -50,7 +50,7 @@ export class InventorySync {
         );
 
         allInventoryData.push(...response.data);
-        console.log(`Fetched inventory for batch of ${batch.length} products`);
+        console.log(`Fetched inventory for batch of ${batch.length} products (received ${response.data.length} with inventory)`);
       }
 
       // Convert array to map for quick lookups by product ID

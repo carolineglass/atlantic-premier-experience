@@ -63,20 +63,23 @@ export function useProductAvailability(productId: number) {
 export function useAutoInventorySync(productIds: number[], enabled = true) {
   const queryClient = useQueryClient();
   const syncIntervalRef = useRef<number | null>(null);
+  const prevProductIdsRef = useRef<number[]>([]);
 
   useEffect(() => {
     if (!enabled || productIds.length === 0) {
       return;
     }
 
-    console.log('Starting automatic inventory sync...');
+    // Check if product IDs actually changed (not just count)
+    const productIdsChanged =
+      prevProductIdsRef.current.length !== productIds.length ||
+      !prevProductIdsRef.current.every((id, index) => id === productIds[index]);
 
-    // Run initial sync if no inventory data exists
-    const existingInventory = InventorySync.getStoredInventory();
-    const hasInventoryData = Object.keys(existingInventory).length > 0;
+    if (productIdsChanged) {
+      console.log('Product IDs changed - triggering immediate inventory sync...');
+      prevProductIdsRef.current = [...productIds];
 
-    if (!hasInventoryData) {
-      console.log('No inventory data found - running initial sync...');
+      // Immediately sync inventory for new product IDs
       InventorySync.syncInventory(productIds)
         .then((result) => {
           // Update all inventory-related queries
@@ -89,15 +92,11 @@ export function useAutoInventorySync(productIds: number[], enabled = true) {
             queryClient.invalidateQueries({ queryKey: ['availability', id] });
           });
 
-          console.log('Initial inventory sync complete:', result.message);
+          console.log('Immediate inventory sync complete:', result.message);
         })
         .catch((error: Error) => {
-          console.error('Initial inventory sync failed:', error);
+          console.error('Immediate inventory sync failed:', error);
         });
-    } else {
-      console.log(
-        `Found inventory data for ${Object.keys(existingInventory).length} products - skipping initial sync`
-      );
     }
 
     // Sync every minute (API recommendation for live pricing)
@@ -124,13 +123,12 @@ export function useAutoInventorySync(productIds: number[], enabled = true) {
 
     console.log('Auto inventory sync started (interval: 1 minute)');
 
-    // Cleanup on unmount
+    // Cleanup on unmount or when productIds change
     return () => {
       if (syncIntervalRef.current) {
         clearInterval(syncIntervalRef.current);
       }
       console.log('Auto inventory sync stopped');
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productIds.length, enabled]); // Re-run if productIds count or enabled status changes
+  }, [productIds, enabled, queryClient]); // Re-run when productIds array changes
 }

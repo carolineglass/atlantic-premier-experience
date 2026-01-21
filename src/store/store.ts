@@ -12,7 +12,7 @@ export const store = configureStore({
     user: userReducer,
   },
   // Redux DevTools are enabled by default in development
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: import.meta.env.DEV,
 });
 
 // TypeScript types for use throughout the app

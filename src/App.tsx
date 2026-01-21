@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
-import { useAutoProductSync, useStoredProducts } from './hooks/useProductSync';
+import { useAutoProductSync } from './hooks/useProductSync';
 import { useAutoInventorySync } from './hooks/useInventory';
 import { useStaticData } from './hooks/useStaticData';
-import { filterUpcomingMatches } from './utils/productFilters';
-import { VisibleProductsProvider, useVisibleProducts } from './contexts/VisibleProductsContext';
 import { HomePage } from './pages/HomePage';
 import { EventDetailPage } from './pages/EventDetailPage';
 
@@ -13,7 +11,6 @@ import { EventDetailPage } from './pages/EventDetailPage';
  */
 function AppContent() {
   const location = useLocation();
-  const { visibleProductIds } = useVisibleProducts();
 
   // Load static data (teams, venues, competitions) on app startup
   useStaticData();
@@ -21,14 +18,9 @@ function AppContent() {
   // Start automatic background syncing for products (hourly)
   useAutoProductSync();
 
-  // Get all products and filter for upcoming matches
-  const { data: allProducts = [] } = useStoredProducts();
-  const upcomingMatches = filterUpcomingMatches(allProducts);
-
-  // Determine which products to sync based on current route
-  // This optimizes API usage by only syncing inventory for relevant products
-  // Uses visibleProductIds from context to sync products actually being displayed
-  // (e.g., after search filtering on homepage)
+  // Determine which products to sync inventory for based on current route
+  // Homepage: no inventory sync (only shows team names and dates)
+  // Event detail page: sync only the specific event being viewed
   const productsToSync = useMemo(() => {
     // Event detail page: only sync the specific event being viewed
     // Extract ID from URL (format: "/event/123/slug" where 123 is the ID)
@@ -36,27 +28,18 @@ function AppContent() {
     if (eventMatch) {
       const eventId = parseInt(eventMatch[1], 10);
       if (!isNaN(eventId)) {
+        console.log(`App: Event detail page - syncing inventory for product ${eventId}`);
         return [eventId];
       }
     }
 
-    // Homepage: sync products currently visible in carousel
-    // Falls back to first 20 if no specific products are set (initial load)
-    if (location.pathname === '/') {
-      if (visibleProductIds.length > 0) {
-        // Sync products set by HomePage (e.g., search results or filtered view)
-        return visibleProductIds;
-      }
-      // Default: sync first 20 events for initial load
-      return upcomingMatches.slice(0, 20).map((p) => p.id);
-    }
-
-    // Default: no sync for other routes
+    // Homepage: no inventory sync needed
+    console.log('App: Homepage - no inventory sync (inventory fetched on event detail page)');
     return [];
-  }, [location.pathname, upcomingMatches, visibleProductIds]);
+  }, [location.pathname]);
 
   // Start automatic inventory syncing (every minute for live pricing)
-  // Syncs only products relevant to current page
+  // Only syncs for event detail pages
   useAutoInventorySync(productsToSync);
 
   return (
@@ -70,9 +53,7 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <VisibleProductsProvider>
-        <AppContent />
-      </VisibleProductsProvider>
+      <AppContent />
     </BrowserRouter>
   );
 }

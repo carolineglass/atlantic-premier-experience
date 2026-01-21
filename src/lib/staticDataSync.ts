@@ -2,15 +2,15 @@ import { apiClient } from '@/api/client';
 import { StorageService } from './storage.service';
 import type {
   StaticData,
-  TeamsResponse,
+  Team,
   TeamResponse,
-  VenuesResponse,
+  Venue,
   VenueResponse,
   CompetitionsResponse,
   CompetitionResponse,
   CountriesResponse,
-  TicketCategoriesResponse,
-  DeliveryMethodsResponse,
+  TicketCategory,
+  DeliveryMethod,
 } from '@/types/static-data';
 
 const STATIC_DATA_KEY = 'tc_static_data';
@@ -22,33 +22,81 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
  */
 export class StaticDataSync {
   /**
+   * Fetch all items with pagination support
+   */
+  private static async fetchAllPages<T>(
+    endpoint: string,
+    dataKey: string
+  ): Promise<T[]> {
+    const allData: T[] = [];
+    let currentPage = 1;
+    let hasMorePages = true;
+
+    while (hasMorePages) {
+      const response = await apiClient.get<{
+        data: T[];
+        meta: { current_page: number; last_page: number };
+      }>(endpoint, {
+        params: {
+          page: {
+            number: currentPage,
+            size: 100,
+          },
+        },
+      });
+
+      allData.push(...response.data);
+      hasMorePages = response.meta.current_page < response.meta.last_page;
+      currentPage++;
+
+      console.log(
+        `Fetched ${dataKey} page ${response.meta.current_page}/${response.meta.last_page} (${response.data.length} items)`
+      );
+    }
+
+    return allData;
+  }
+
+  /**
    * Fetch all static data from API and store in localStorage
    */
   static async syncAll(): Promise<StaticData> {
     console.log('Syncing all static data...');
 
     try {
-      const [teams, venues, competitions, countries, ticketCategories, deliveryMethods] = await Promise.all([
-        apiClient.get<TeamsResponse>('/teams'),
-        apiClient.get<VenuesResponse>('/venues'),
+      // Fetch paginated endpoints
+      const [teams, venues, ticketCategories, deliveryMethods] = await Promise.all([
+        this.fetchAllPages<Team>('/teams', 'teams'),
+        this.fetchAllPages<Venue>('/venues', 'venues'),
+        this.fetchAllPages<TicketCategory>('/ticket-categories', 'ticket categories'),
+        this.fetchAllPages<DeliveryMethod>('/delivery-methods', 'delivery methods'),
+      ]);
+
+      // Fetch non-paginated endpoints
+      const [competitions, countries] = await Promise.all([
         apiClient.get<CompetitionsResponse>('/competitions'),
         apiClient.get<CountriesResponse>('/countries'),
-        apiClient.get<TicketCategoriesResponse>('/ticket-categories'),
-        apiClient.get<DeliveryMethodsResponse>('/delivery-methods'),
       ]);
 
       const staticData: StaticData = {
-        teams: teams.data,
-        venues: venues.data,
+        teams,
+        venues,
         competitions: competitions.data,
         countries: countries.data,
-        ticketCategories: ticketCategories.data,
-        deliveryMethods: deliveryMethods.data,
+        ticketCategories,
+        deliveryMethods,
         lastSync: Date.now(),
       };
 
       StorageService.set(STATIC_DATA_KEY, staticData);
-      console.log('Static data synced successfully');
+      console.log('Static data synced successfully:', {
+        teams: teams.length,
+        venues: venues.length,
+        competitions: competitions.data.length,
+        countries: countries.data.length,
+        ticketCategories: ticketCategories.length,
+        deliveryMethods: deliveryMethods.length,
+      });
 
       return staticData;
     } catch (error) {

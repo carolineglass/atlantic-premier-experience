@@ -9,6 +9,10 @@
  */
 export interface TeamsResponse {
   data: Team[];
+  meta: {
+    current_page: number;
+    last_page: number;
+  };
 }
 
 /**
@@ -44,6 +48,10 @@ export interface TeamsQueryParams {
  */
 export interface VenuesResponse {
   data: Venue[];
+  meta: {
+    current_page: number;
+    last_page: number;
+  };
 }
 
 /**
@@ -135,6 +143,10 @@ export interface Country {
  */
 export interface TicketCategoriesResponse {
   data: TicketCategory[];
+  meta: {
+    current_page: number;
+    last_page: number;
+  };
 }
 
 export interface TicketCategory {
@@ -167,6 +179,10 @@ export interface TicketCategoriesQueryParams {
  */
 export interface DeliveryMethodsResponse {
   data: DeliveryMethod[];
+  meta: {
+    current_page: number;
+    last_page: number;
+  };
 }
 
 export interface DeliveryMethod {
