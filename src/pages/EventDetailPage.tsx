@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useProductDetail } from '@/hooks/useProductDetail';
 import { useStaticData } from '@/hooks/useStaticData';
 import { useProductInventory } from '@/hooks/useInventory';
@@ -9,6 +9,16 @@ import {
 } from '@/utils/dateFormatters';
 import { TeamBadge } from '@/components/TeamBadge';
 import { SeatingChart } from '@/components/SeatingChart';
+import { InteractiveSeatMap } from '@/components/InteractiveSeatMap';
+
+// TODO(production): remove this prototype gate before deploying to production.
+// The sandbox API returns empty seating_plan for every product, so Celtic Park
+// events demo the interactive map with a vendored SVG + mock zone mapping.
+// With a production key, product.seating_plan provides the real image URL and
+// category_map — delete PROTOTYPE_VENUE_SVGS and pass those through instead.
+const PROTOTYPE_VENUE_SVGS: Record<string, string> = {
+  'Celtic Park': '/seating-prototype/celtic-park.svg',
+};
 
 export function EventDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -28,6 +38,15 @@ export function EventDetailPage() {
   const [selectedTickets, setSelectedTickets] = useState<
     Record<number, number>
   >({});
+
+  // Clicking a seat-map zone jumps to (and briefly highlights) its ticket card
+  const scrollToCategory = useCallback((categoryId: number) => {
+    const el = document.querySelector(`[data-ticket-category="${categoryId}"]`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('ring-2', 'ring-pitch-500');
+    setTimeout(() => el.classList.remove('ring-2', 'ring-pitch-500'), 1600);
+  }, []);
 
   // Wait for all data to load
   if (productLoading || inventoryLoading || staticDataLoading) {
@@ -200,13 +219,35 @@ export function EventDetailPage() {
             </div>
           </div>
 
-          {/* Seating chart (major venues only; hides itself elsewhere) */}
-          {venue?.images?.seating && (
-            <SeatingChart
-              imageUrl={venue.images.seating}
-              venueName={venue.name}
-            />
-          )}
+          {/* Interactive seat map: real seating_plan data when the API
+              provides it, else the prototype SVG for demo venues */}
+          {(() => {
+            const realPlan = product.seating_plan?.[0];
+            const prototypeSvg = Object.entries(PROTOTYPE_VENUE_SVGS).find(
+              ([name]) => venue?.name.includes(name)
+            )?.[1];
+            const svgUrl = realPlan?.image ?? prototypeSvg;
+            const allTickets = inventory?.ticket_options ?? [];
+            if (svgUrl && allTickets.length > 0) {
+              return (
+                <InteractiveSeatMap
+                  svgUrl={svgUrl}
+                  categoryMap={realPlan?.category_map}
+                  tickets={allTickets}
+                  categories={staticData?.ticketCategories ?? []}
+                  onSectionSelect={scrollToCategory}
+                  isPrototypeData={!realPlan}
+                />
+              );
+            }
+            // Static chart fallback (major venues only; hides itself on 403)
+            return venue?.images?.seating ? (
+              <SeatingChart
+                imageUrl={venue.images.seating}
+                venueName={venue.name}
+              />
+            ) : null;
+          })()}
 
           {/* Product Information */}
           {product.information && (
@@ -273,6 +314,7 @@ export function EventDetailPage() {
                   return (
                     <div
                       key={ticket.id}
+                      data-ticket-category={ticket.ticket_category}
                       className={`rounded-2xl border p-4 transition-colors ${
                         selected
                           ? 'border-pitch-500 bg-pitch-50/50'

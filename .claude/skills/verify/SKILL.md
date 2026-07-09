@@ -36,5 +36,6 @@ First load with an empty profile takes up to 60-90s before event cards render
 ## Gotchas
 
 - API returns products of type `event` with `match: null` — any code reading `product.match.*` must guard (crashed the whole app once).
-- Sandbox inventory only exists for a small subset of products; cards without inventory show "See tickets", genuinely sold-out ones show "Sold out". Don't read "few prices" as a bug.
+- POST /inventory-status responses are **paginated at 10/page by default** — always pass `page[size]=100` and follow `meta.last_page` (InventorySync does this). Truncated batches look like "products lost their inventory" and once caused the seat map to vanish mid-session.
+- Cards without synced inventory show "See tickets", genuinely sold-out ones show "Sold out".
 - Console shows periodic sync logs; 429 errors mean rate limit, not app breakage.

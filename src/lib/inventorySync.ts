@@ -44,17 +44,33 @@ export class InventorySync {
           products: batch,
         };
 
-        const response: InventoryStatusResponse = await apiClient.post(
-          '/inventory-status',
-          requestBody
-        );
+        // The response is paginated (default page size is only 10), so ask
+        // for full pages and follow last_page — otherwise products beyond
+        // the first page are silently dropped and look like lost inventory
+        let currentPage = 1;
+        let lastPage = 1;
+        do {
+          const response: InventoryStatusResponse = await apiClient.post(
+            '/inventory-status',
+            requestBody,
+            { params: { page: { number: currentPage, size: 100 } } }
+          );
+          allInventoryData.push(...response.data);
+          lastPage = response.meta?.last_page ?? 1;
+          currentPage++;
+        } while (currentPage <= lastPage);
 
-        allInventoryData.push(...response.data);
-        console.log(`Fetched inventory for batch of ${batch.length} products (received ${response.data.length} with inventory)`);
+        console.log(`Fetched inventory for batch of ${batch.length} products`);
       }
 
-      // Convert array to map for quick lookups by product ID
-      const inventoryMap: InventoryMap = {};
+      // Merge into the existing map rather than replacing it — concurrent
+      // syncs for different routes (homepage batch vs. event page single)
+      // must not wipe each other's products. Requested products missing from
+      // the response no longer have inventory, so drop just those.
+      const inventoryMap: InventoryMap = { ...this.getStoredInventory() };
+      for (const id of productIds) {
+        delete inventoryMap[id];
+      }
       allInventoryData.forEach((inventory) => {
         inventoryMap[inventory.id] = inventory;
       });

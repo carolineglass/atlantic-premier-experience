@@ -159,6 +159,7 @@ export interface InventoryStatusRequest {
 
 export interface InventoryStatusResponse {
   data: ProductInventory[];
+  meta?: PaginationMeta;
 }
 
 export interface ProductInventory {
