@@ -5,13 +5,11 @@ import { EventCard } from './EventCard';
 interface EventCarouselProps {
   products: Product[];
   title?: string;
-  onEventClick?: (product: Product) => void;
 }
 
 export function EventCarousel({
   products,
-  title = 'Upcoming Matches',
-  onEventClick,
+  title = 'Upcoming matches',
 }: EventCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -36,17 +34,19 @@ export function EventCarousel({
   return (
     <div className="relative">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+      <div className="mb-8 flex items-center justify-between">
+        <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
         {products.length > 3 && (
           <div className="flex gap-2">
             <button
               onClick={() => scroll('left')}
-              className="p-2 rounded-full bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white transition-colors hover:border-ink"
               aria-label="Scroll left"
             >
               <svg
-                className="w-5 h-5 text-gray-600"
+                className="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -61,11 +61,11 @@ export function EventCarousel({
             </button>
             <button
               onClick={() => scroll('right')}
-              className="p-2 rounded-full bg-white border border-gray-300 hover:bg-gray-50 transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white transition-colors hover:border-ink"
               aria-label="Scroll right"
             >
               <svg
-                className="w-5 h-5 text-gray-600"
+                className="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -85,18 +85,16 @@ export function EventCarousel({
       {/* Scrollable Container */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+        className="scrollbar-hide flex gap-6 overflow-x-auto scroll-smooth pb-4"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
         }}
       >
         {products.map((product) => (
-          <EventCard
-            key={product.id}
-            product={product}
-            onClick={() => onEventClick?.(product)}
-          />
+          <div key={product.id} className="w-80 flex-shrink-0">
+            <EventCard product={product} />
+          </div>
         ))}
       </div>
 

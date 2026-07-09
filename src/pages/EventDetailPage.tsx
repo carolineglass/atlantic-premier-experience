@@ -1,215 +1,322 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useProductDetail } from '@/hooks/useProductDetail';
 import { useStaticData } from '@/hooks/useStaticData';
 import { useProductInventory } from '@/hooks/useInventory';
+import {
+  formatEventDetailDate,
+  formatEventDetailTime,
+} from '@/utils/dateFormatters';
+import { TeamBadge } from '@/components/TeamBadge';
+import { SeatingChart } from '@/components/SeatingChart';
 
 export function EventDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
 
   // Extract product ID from URL parameter (format: "/event/123/slug")
   const productId = id ? parseInt(id, 10) : undefined;
 
-  const { data: product, isLoading: productLoading, error: productError } = useProductDetail(productId);
-  const { data: inventory, isLoading: inventoryLoading } = useProductInventory(productId);
+  const {
+    data: product,
+    isLoading: productLoading,
+    error: productError,
+  } = useProductDetail(productId);
+  const { data: inventory, isLoading: inventoryLoading } =
+    useProductInventory(productId);
   const { data: staticData, isLoading: staticDataLoading } = useStaticData();
 
-  const [selectedTickets, setSelectedTickets] = useState<Record<number, number>>({});
+  const [selectedTickets, setSelectedTickets] = useState<
+    Record<number, number>
+  >({});
 
   // Wait for all data to load
   if (productLoading || inventoryLoading || staticDataLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center">
-        <div className="text-white text-xl">Loading event details...</div>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-pitch-500" />
+          <p className="text-ink-muted">Loading event details…</p>
+        </div>
       </div>
     );
   }
 
   if (productError || !product) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center">
+      <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
-          <h1 className="text-white text-2xl mb-4">Event not found</h1>
-          <button
-            onClick={() => navigate('/')}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            Back to Home
-          </button>
+          <h1 className="font-display text-3xl font-bold">Event not found</h1>
+          <p className="mt-3 text-ink-muted">
+            This fixture may have expired or moved.
+          </p>
+          <Link to="/fixtures" className="btn-secondary mt-8">
+            Browse all fixtures
+          </Link>
         </div>
       </div>
     );
   }
 
   // Get team/venue/competition names from static data
-  const homeTeamName = staticData?.teams.find((t) => t.id === product.match.home)?.name;
-  const awayTeamName = staticData?.teams.find((t) => t.id === product.match.away)?.name;
-  const venueName = staticData?.venues.find((v) => v.id === product.venue)?.name;
-  const competitionName = staticData?.competitions.find((c) => c.id === product.match.competition)?.name;
+  const homeTeamName =
+    staticData?.teams.find((t) => t.id === product.match.home)?.name ??
+    `Team ${product.match.home}`;
+  const awayTeamName =
+    staticData?.teams.find((t) => t.id === product.match.away)?.name ??
+    `Team ${product.match.away}`;
+  const venue = staticData?.venues.find((v) => v.id === product.venue);
+  const competitionName = staticData?.competitions.find(
+    (c) => c.id === product.match.competition
+  )?.name;
 
-  const matchDate = new Date(product.match.start.local);
-  const formattedDate = matchDate.toLocaleDateString('en-GB', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-  const formattedTime = matchDate.toLocaleTimeString('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const formattedDate = formatEventDetailDate(product.match.start.local);
+  const formattedTime = formatEventDetailTime(product.match.start.local);
 
-  const availableTickets = inventory?.ticket_options.filter((t) => t.available) || [];
+  const availableTickets =
+    inventory?.ticket_options.filter((t) => t.available) || [];
   const isSoldOut = availableTickets.length === 0;
 
   const handleQuantityChange = (ticketId: number, quantity: number) => {
     setSelectedTickets((prev) => {
       if (quantity === 0) {
-        const { [ticketId]: _, ...rest } = prev;
+        const rest = { ...prev };
+        delete rest[ticketId];
         return rest;
       }
       return { ...prev, [ticketId]: quantity };
     });
   };
 
-  const totalItems = Object.values(selectedTickets).reduce((sum, qty) => sum + qty, 0);
-  const totalPrice = Object.entries(selectedTickets).reduce((sum, [ticketId, qty]) => {
-    const ticket = availableTickets.find((t) => t.id === parseInt(ticketId, 10));
-    return sum + (ticket ? ticket.price * qty : 0);
-  }, 0);
+  const totalItems = Object.values(selectedTickets).reduce(
+    (sum, qty) => sum + qty,
+    0
+  );
+  const totalPrice = Object.entries(selectedTickets).reduce(
+    (sum, [ticketId, qty]) => {
+      const ticket = availableTickets.find(
+        (t) => t.id === parseInt(ticketId, 10)
+      );
+      return sum + (ticket ? ticket.price * qty : 0);
+    },
+    0
+  );
 
   const handleAddToCart = () => {
     // TODO: Implement cart functionality
     console.log('Adding to cart:', selectedTickets);
-    alert(`Added ${totalItems} ticket(s) to cart. Total: £${totalPrice.toFixed(2)}`);
+    alert(
+      `Added ${totalItems} ticket(s) to cart. Total: £${totalPrice.toFixed(2)}`
+    );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
-      {/* Header */}
-      <header className="bg-gray-900/50 border-b border-gray-700">
-        <div className="container mx-auto px-4 py-4">
-          <button
-            onClick={() => navigate('/')}
-            className="text-gray-400 hover:text-white flex items-center gap-2"
-          >
-            <span>←</span> Back to Events
-          </button>
-        </div>
-      </header>
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Breadcrumb */}
+      <Link
+        to="/fixtures"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-ink-muted hover:text-ink"
+      >
+        <span aria-hidden="true">←</span> All fixtures
+      </Link>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Match Header */}
-            <div className="bg-gray-800 rounded-lg p-6 shadow-xl">
-              <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
-                  {competitionName || `Competition ${product.match.competition}`}
-                </span>
-                <span className={`px-3 py-1 text-sm rounded-full ${
+      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">
+        {/* Main Content */}
+        <div className="space-y-6 lg:col-span-2">
+          {/* Match Header */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-card">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="chip bg-gray-100 text-ink-soft">
+                {competitionName || `Competition ${product.match.competition}`}
+              </span>
+              <span
+                className={`chip ${
                   product.match.status === 'Upcoming'
-                    ? 'bg-green-600 text-white'
-                    : 'bg-red-600 text-white'
-                }`}>
-                  {product.match.status}
-                </span>
-              </div>
-
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                {homeTeamName || `Team ${product.match.home}`} vs{' '}
-                {awayTeamName || `Team ${product.match.away}`}
-              </h1>
-
-              <div className="flex flex-wrap gap-4 text-gray-300 mt-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-gray-400">📅</span>
-                  <span>{formattedDate}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-gray-400">🕐</span>
-                  <span>{formattedTime}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-gray-400">📍</span>
-                  <span>{venueName || `Venue ${product.venue}`}</span>
-                </div>
-              </div>
+                    ? 'bg-pitch-50 text-pitch-700'
+                    : 'bg-red-50 text-red-700'
+                }`}
+              >
+                {product.match.status}
+              </span>
             </div>
 
-            {/* Product Information */}
-            {product.information && (
-              <div className="bg-gray-800 rounded-lg p-6 shadow-xl">
-                <h2 className="text-2xl font-bold text-white mb-4">Event Information</h2>
-                <div
-                  className="text-gray-300 prose prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: product.information }}
-                />
-              </div>
-            )}
+            <div className="mt-6 flex items-center gap-5">
+              <TeamBadge name={homeTeamName} size="lg" />
+              <span className="font-display text-lg font-bold text-ink-muted">
+                v
+              </span>
+              <TeamBadge name={awayTeamName} size="lg" />
+            </div>
 
-            {/* Notes */}
-            {product.notes && (
-              <div className="bg-gray-800 rounded-lg p-6 shadow-xl">
-                <h2 className="text-2xl font-bold text-white mb-4">Important Notes</h2>
-                <div
-                  className="text-gray-300 prose prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: product.notes }}
-                />
-              </div>
-            )}
+            <h1 className="mt-5 font-display text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+              {homeTeamName} <span className="text-ink-muted">v</span>{' '}
+              {awayTeamName}
+            </h1>
 
-            {/* Timetable */}
-            {product.timetable && (
-              <div className="bg-gray-800 rounded-lg p-6 shadow-xl">
-                <h2 className="text-2xl font-bold text-white mb-4">Event Timetable</h2>
-                <div
-                  className="text-gray-300 prose prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{ __html: product.timetable }}
-                />
+            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-ink-soft">
+              <div className="flex items-center gap-2">
+                <svg
+                  className="h-5 w-5 text-ink-muted"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>
+                  {formattedDate} · {formattedTime}
+                </span>
               </div>
-            )}
+              <div className="flex items-center gap-2">
+                <svg
+                  className="h-5 w-5 text-ink-muted"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span>
+                  {venue
+                    ? `${venue.name}${venue.city ? `, ${venue.city}` : ''}`
+                    : `Venue ${product.venue}`}
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* Sidebar - Ticket Selection */}
-          <div className="lg:col-span-1">
-            <div className="bg-gray-800 rounded-lg p-6 shadow-xl sticky top-4">
-              <h2 className="text-2xl font-bold text-white mb-6">Select Tickets</h2>
+          {/* Seating chart (major venues only; hides itself elsewhere) */}
+          {venue?.images?.seating && (
+            <SeatingChart
+              imageUrl={venue.images.seating}
+              venueName={venue.name}
+            />
+          )}
 
-              {isSoldOut ? (
-                <div className="text-center py-8">
-                  <div className="text-red-500 text-lg font-semibold mb-2">Sold Out</div>
-                  <p className="text-gray-400">No tickets currently available</p>
+          {/* Product Information */}
+          {product.information && (
+            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-card">
+              <h2 className="font-display text-2xl font-bold">
+                Event information
+              </h2>
+              <div
+                className="prose mt-4 max-w-none text-ink-soft"
+                dangerouslySetInnerHTML={{ __html: product.information }}
+              />
+            </div>
+          )}
+
+          {/* Notes */}
+          {product.notes && (
+            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-card">
+              <h2 className="font-display text-2xl font-bold">
+                Important notes
+              </h2>
+              <div
+                className="prose mt-4 max-w-none text-ink-soft"
+                dangerouslySetInnerHTML={{ __html: product.notes }}
+              />
+            </div>
+          )}
+
+          {/* Timetable */}
+          {product.timetable && (
+            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-card">
+              <h2 className="font-display text-2xl font-bold">
+                Event timetable
+              </h2>
+              <div
+                className="prose mt-4 max-w-none text-ink-soft"
+                dangerouslySetInnerHTML={{ __html: product.timetable }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Sidebar - Ticket Selection */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-24 rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
+            <h2 className="font-display text-2xl font-bold">Select tickets</h2>
+
+            {isSoldOut ? (
+              <div className="py-10 text-center">
+                <div className="chip mx-auto bg-red-50 text-red-700">
+                  Sold out
                 </div>
-              ) : (
-                <div className="space-y-4">
-                  {availableTickets.map((ticket) => (
+                <p className="mt-4 text-ink-muted">
+                  No tickets currently available — prices refresh every minute,
+                  so check back soon.
+                </p>
+              </div>
+            ) : (
+              <div className="mt-6 space-y-4">
+                {availableTickets.map((ticket) => {
+                  const selected = (selectedTickets[ticket.id] || 0) > 0;
+                  const category = staticData?.ticketCategories.find(
+                    (c) => c.id === ticket.ticket_category
+                  );
+                  return (
                     <div
                       key={ticket.id}
-                      className="border border-gray-700 rounded-lg p-4 hover:border-blue-500 transition-colors"
+                      className={`rounded-2xl border p-4 transition-colors ${
+                        selected
+                          ? 'border-pitch-500 bg-pitch-50/50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
                     >
-                      <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-start justify-between gap-3">
                         <div>
-                          <h3 className="text-white font-semibold">{ticket.name}</h3>
-                          <p className="text-2xl font-bold text-blue-400 mt-1">
+                          <h3 className="flex items-center gap-2 font-semibold leading-snug">
+                            {category?.color && (
+                              <span
+                                className="h-3 w-3 flex-shrink-0 rounded-full border border-ink/10"
+                                style={{ backgroundColor: category.color }}
+                                title={`Zone color on the seating plan`}
+                              />
+                            )}
+                            {ticket.name}
+                          </h3>
+                          <p className="mt-1 font-display text-2xl font-bold">
                             £{ticket.price.toFixed(2)}
                           </p>
                         </div>
-                        <span className="px-2 py-1 bg-green-600 text-white text-xs rounded">
+                        <span className="chip bg-pitch-50 text-pitch-700">
                           Available
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-3">
-                        <label className="text-gray-400 text-sm">Quantity:</label>
+                      <div className="mt-3 flex items-center gap-3">
+                        <label
+                          htmlFor={`qty-${ticket.id}`}
+                          className="text-sm text-ink-muted"
+                        >
+                          Quantity
+                        </label>
                         <select
+                          id={`qty-${ticket.id}`}
                           value={selectedTickets[ticket.id] || 0}
                           onChange={(e) =>
-                            handleQuantityChange(ticket.id, parseInt(e.target.value, 10))
+                            handleQuantityChange(
+                              ticket.id,
+                              parseInt(e.target.value, 10)
+                            )
                           }
-                          className="bg-gray-700 text-white rounded px-3 py-1 border border-gray-600 focus:border-blue-500 focus:outline-none"
+                          className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm font-semibold focus:border-ink focus:outline-none"
                         >
                           {Array.from(
                             { length: Math.min(ticket.max_purchase_qty, 10) + 1 },
@@ -223,41 +330,38 @@ export function EventDetailPage() {
                       </div>
 
                       {ticket.max_purchase_qty && (
-                        <p className="text-gray-500 text-xs mt-2">
+                        <p className="mt-2 text-xs text-ink-muted">
                           Max {ticket.max_purchase_qty} per order
                         </p>
                       )}
                     </div>
-                  ))}
-                </div>
-              )}
+                  );
+                })}
+              </div>
+            )}
 
-              {/* Cart Summary */}
-              {totalItems > 0 && (
-                <div className="mt-6 pt-6 border-t border-gray-700">
-                  <div className="flex justify-between text-white mb-2">
-                    <span>Items:</span>
-                    <span>{totalItems}</span>
-                  </div>
-                  <div className="flex justify-between text-white text-xl font-bold mb-4">
-                    <span>Total:</span>
-                    <span>£{totalPrice.toFixed(2)}</span>
-                  </div>
-                  <button
-                    onClick={handleAddToCart}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors"
-                  >
-                    Add to Cart
-                  </button>
+            {/* Cart Summary */}
+            {totalItems > 0 && (
+              <div className="mt-6 border-t border-gray-100 pt-6">
+                <div className="flex justify-between text-sm text-ink-soft">
+                  <span>Tickets</span>
+                  <span>{totalItems}</span>
                 </div>
-              )}
+                <div className="mt-2 flex justify-between font-display text-xl font-bold">
+                  <span>Total</span>
+                  <span>£{totalPrice.toFixed(2)}</span>
+                </div>
+                <button onClick={handleAddToCart} className="btn-primary mt-5 w-full">
+                  Add to cart
+                </button>
+              </div>
+            )}
 
-              {!isSoldOut && totalItems === 0 && (
-                <p className="text-gray-500 text-center mt-6 text-sm">
-                  Select ticket quantities above
-                </p>
-              )}
-            </div>
+            {!isSoldOut && totalItems === 0 && (
+              <p className="mt-6 text-center text-sm text-ink-muted">
+                Select ticket quantities above
+              </p>
+            )}
           </div>
         </div>
       </div>

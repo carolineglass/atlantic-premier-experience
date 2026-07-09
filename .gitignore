@@ -45,3 +45,5 @@ coverage
 .cache
 .parcel-cache
 .eslintcache
+# Claude Code local settings
+.claude/settings.local.json
