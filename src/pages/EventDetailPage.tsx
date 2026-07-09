@@ -7,7 +7,6 @@ import {
   formatEventDetailDate,
   formatEventDetailTime,
 } from '@/utils/dateFormatters';
-import { TeamBadge } from '@/components/TeamBadge';
 import { SeatingChart } from '@/components/SeatingChart';
 import { InteractiveSeatMap } from '@/components/InteractiveSeatMap';
 
@@ -158,16 +157,11 @@ export function EventDetailPage() {
               </span>
             </div>
 
-            <div className="mt-6 flex items-center gap-5">
-              <TeamBadge name={homeTeamName} size="lg" />
-              <span className="font-display text-lg font-bold text-ink-muted">
+            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl">
+              {homeTeamName}
+              <span className="block text-xl font-medium text-ink-muted md:text-2xl">
                 v
               </span>
-              <TeamBadge name={awayTeamName} size="lg" />
-            </div>
-
-            <h1 className="mt-5 font-display text-3xl font-bold leading-tight tracking-tight md:text-4xl">
-              {homeTeamName} <span className="text-ink-muted">v</span>{' '}
               {awayTeamName}
             </h1>
 

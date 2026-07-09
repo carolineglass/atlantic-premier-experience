@@ -5,7 +5,6 @@ import {
   formatEventCardDate,
   formatEventCardTime,
 } from '@/utils/dateFormatters';
-import { TeamBadge } from './TeamBadge';
 import type { Product } from '@/types/product';
 
 interface EventCardProps {
@@ -36,7 +35,7 @@ export function EventCard({ product }: EventCardProps) {
   return (
     <Link
       to={`/event/${product.id}/${product.slug}`}
-      className="group flex w-full flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+      className="group flex w-full flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
     >
       <div className="flex items-center justify-between">
         <span className="chip bg-gray-100 text-ink-soft">
@@ -47,17 +46,14 @@ export function EventCard({ product }: EventCardProps) {
         )}
       </div>
 
-      <div className="mt-5 flex items-center gap-4">
-        <TeamBadge name={homeName} size="md" />
-        <span className="font-display text-sm font-bold text-ink-muted">v</span>
-        <TeamBadge name={awayName} size="md" />
-      </div>
-
-      <h3 className="mt-4 font-display text-lg font-bold leading-snug">
-        {homeName} <span className="text-ink-muted">v</span> {awayName}
+      {/* Typographic matchup — the team names are the artwork */}
+      <h3 className="mt-6 font-display text-2xl font-bold leading-tight tracking-tight">
+        {homeName}
+        <span className="block text-base font-medium text-ink-muted">v</span>
+        {awayName}
       </h3>
 
-      <div className="mt-2 space-y-1 text-sm text-ink-muted">
+      <div className="mt-4 space-y-1 text-sm text-ink-muted">
         <p>
           {formatEventCardDate(product.match.start.local)} ·{' '}
           {formatEventCardTime(product.match.start.local)}
@@ -70,7 +66,7 @@ export function EventCard({ product }: EventCardProps) {
         )}
       </div>
 
-      <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+      <div className="mt-6 flex flex-1 items-end justify-between border-t border-gray-100 pt-4">
         {priceLoading ? (
           <span className="h-5 w-20 animate-pulse rounded-full bg-gray-100" />
         ) : lowestPrice != null && !soldOut ? (

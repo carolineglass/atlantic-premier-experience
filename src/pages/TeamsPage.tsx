@@ -4,7 +4,6 @@ import { useStoredProducts } from '@/hooks/useProductSync';
 import { useStaticData } from '@/hooks/useStaticData';
 import { filterUpcomingMatches } from '@/utils/productFilters';
 import { slugify } from '@/utils/slugify';
-import { TeamBadge } from '@/components/TeamBadge';
 import type { Team } from '@/types/static-data';
 
 export function TeamsPage() {
@@ -59,17 +58,14 @@ export function TeamsPage() {
             <Link
               key={team.id}
               to={`/team/${slugify(team.name)}`}
-              className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
+              className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
             >
-              <TeamBadge name={team.name} size="md" />
-              <div>
-                <p className="font-display font-bold leading-tight">
-                  {team.name}
-                </p>
-                <p className="mt-1 text-xs text-ink-muted">
-                  {matchCount} upcoming match{matchCount !== 1 ? 'es' : ''}
-                </p>
-              </div>
+              <p className="font-display text-lg font-bold leading-tight tracking-tight">
+                {team.name}
+              </p>
+              <p className="mt-2 text-xs text-ink-muted">
+                {matchCount} upcoming match{matchCount !== 1 ? 'es' : ''}
+              </p>
             </Link>
           ))}
         </div>

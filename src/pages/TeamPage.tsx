@@ -9,7 +9,6 @@ import {
 } from '@/utils/productFilters';
 import { slugify } from '@/utils/slugify';
 import { EventCard } from '@/components/EventCard';
-import { TeamBadge } from '@/components/TeamBadge';
 
 export function TeamPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -48,17 +47,14 @@ export function TeamPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       {team ? (
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-          <TeamBadge name={team.name} size="xl" />
-          <div>
-            <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              {team.name}
-            </h1>
-            <p className="mt-2 text-lg text-ink-muted">
-              {teamMatches.length} upcoming match
-              {teamMatches.length !== 1 ? 'es' : ''} with tickets on sale
-            </p>
-          </div>
+        <div>
+          <h1 className="font-display text-5xl font-bold tracking-tight sm:text-6xl">
+            {team.name}
+          </h1>
+          <p className="mt-3 text-lg text-ink-muted">
+            {teamMatches.length} upcoming match
+            {teamMatches.length !== 1 ? 'es' : ''} with tickets on sale
+          </p>
         </div>
       ) : (
         <div className="h-24 w-2/3 animate-pulse rounded-2xl bg-gray-100" />

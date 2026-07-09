@@ -9,7 +9,6 @@ import {
 import { slugify } from '@/utils/slugify';
 import { EventCarousel } from '@/components/EventCarousel';
 import { EventCard } from '@/components/EventCard';
-import { TeamBadge } from '@/components/TeamBadge';
 import { TrustSection } from '@/components/TrustSection';
 import { FAQ } from '@/components/FAQ';
 import type { Team } from '@/types/static-data';
@@ -170,17 +169,14 @@ export function HomePage() {
               All teams →
             </Link>
           </div>
-          <div className="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-4 lg:grid-cols-6">
+          <div className="mt-8 flex flex-wrap gap-3">
             {topTeams.map((team) => (
               <Link
                 key={team.id}
                 to={`/team/${slugify(team.name)}`}
-                className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-200 bg-white p-5 text-center shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover"
+                className="rounded-full border border-gray-200 bg-white px-5 py-3 font-display font-bold transition-colors hover:border-ink hover:bg-ink hover:text-white"
               >
-                <TeamBadge name={team.name} size="lg" />
-                <span className="text-sm font-semibold leading-tight">
-                  {team.name}
-                </span>
+                {team.name}
               </Link>
             ))}
           </div>
