@@ -12,7 +12,7 @@
   }
 
   ::selection {
-    @apply bg-pitch-100 text-ink;
+    @apply bg-ocean-100 text-ink;
   }
 }
 
@@ -22,7 +22,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-pitch-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-pitch-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-pitch-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ocean-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-ocean-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-ocean-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .btn-secondary {

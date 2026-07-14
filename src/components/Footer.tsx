@@ -8,7 +8,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 font-display text-xl font-bold">
               Atlantic
-              <span className="inline-block h-2.5 w-2.5 rotate-45 rounded-[3px] bg-pitch-500" />
+              <span className="inline-block h-2.5 w-2.5 rotate-45 rounded-[3px] bg-ocean-500" />
             </div>
             <p className="mt-4 text-sm text-ink-muted">
               [PLACEHOLDER: One-line company description — who you are and what
@@ -25,8 +25,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/teams" className="hover:text-ink">
-                  Browse by team
+                <Link to="/fixtures?focus=search" className="hover:text-ink">
+                  Find tickets
                 </Link>
               </li>
             </ul>
@@ -47,6 +47,11 @@ export function Footer() {
               <li>[PLACEHOLDER: Terms &amp; conditions]</li>
               <li>[PLACEHOLDER: Privacy policy]</li>
               <li>[PLACEHOLDER: Company registration details]</li>
+              <li>
+                <Link to="/credits" className="hover:text-ink">
+                  Photo credits
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

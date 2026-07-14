@@ -12,9 +12,24 @@ interface SeatingChartProps {
  */
 export function SeatingChart({ imageUrl, venueName }: SeatingChartProps) {
   const [zoomed, setZoomed] = useState(false);
-  // Sandbox file storage 403s on chart images; hide the whole panel when the
-  // image can't load so it only appears where the chart actually renders
-  const [imgFailed, setImgFailed] = useState(false);
+  // Preload the image and only render the panel once it has loaded —
+  // rendering first and hiding on error flashes an empty panel on venues
+  // whose chart URL 403s (all of them on the sandbox)
+  const [imgState, setImgState] = useState<'pending' | 'ok' | 'failed'>(
+    'pending'
+  );
+
+  useEffect(() => {
+    setImgState('pending');
+    const probe = new Image();
+    probe.onload = () => setImgState('ok');
+    probe.onerror = () => setImgState('failed');
+    probe.src = imageUrl;
+    return () => {
+      probe.onload = null;
+      probe.onerror = null;
+    };
+  }, [imageUrl]);
 
   // Close the lightbox on Escape
   useEffect(() => {
@@ -30,7 +45,7 @@ export function SeatingChart({ imageUrl, venueName }: SeatingChartProps) {
     };
   }, [zoomed]);
 
-  if (imgFailed) return null;
+  if (imgState !== 'ok') return null;
 
   return (
     <>
@@ -48,8 +63,6 @@ export function SeatingChart({ imageUrl, venueName }: SeatingChartProps) {
             src={imageUrl}
             alt={`Seating plan for ${venueName}`}
             className="w-full object-contain"
-            loading="lazy"
-            onError={() => setImgFailed(true)}
           />
         </button>
         <p className="mt-3 text-sm text-ink-muted">

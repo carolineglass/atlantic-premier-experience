@@ -148,7 +148,7 @@ export function FilterBar({ competitions, teams }: FilterBarProps) {
       {hasFilters && (
         <button
           onClick={clearAll}
-          className="text-sm font-semibold text-pitch-600 hover:text-pitch-700"
+          className="text-sm font-semibold text-ocean-600 hover:text-ocean-700"
         >
           Clear all
         </button>

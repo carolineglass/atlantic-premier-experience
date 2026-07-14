@@ -5,16 +5,13 @@ import { useAutoInventorySync } from './hooks/useInventory';
 import { useStaticData } from './hooks/useStaticData';
 import {
   filterUpcomingMatches,
-  filterByTeam,
   sortByKickoff,
 } from './utils/productFilters';
-import { slugify } from './utils/slugify';
 import { PageLayout } from './components/PageLayout';
 import { HomePage } from './pages/HomePage';
 import { FixturesPage } from './pages/FixturesPage';
-import { TeamsPage } from './pages/TeamsPage';
-import { TeamPage } from './pages/TeamPage';
 import { EventDetailPage } from './pages/EventDetailPage';
+import { CreditsPage } from './pages/CreditsPage';
 
 /**
  * Main app component with route-based inventory sync optimization
@@ -22,7 +19,9 @@ import { EventDetailPage } from './pages/EventDetailPage';
 function AppContent() {
   const location = useLocation();
   const { data: allProducts = [] } = useStoredProducts();
-  const { data: staticData } = useStaticData();
+
+  // Load static data (teams, venues, competitions) on app startup
+  useStaticData();
 
   // Start automatic background syncing for products (hourly)
   useAutoProductSync();
@@ -40,18 +39,6 @@ function AppContent() {
 
     const upcoming = sortByKickoff(filterUpcomingMatches(allProducts));
 
-    // Team page: that team's upcoming matches
-    const teamMatch = location.pathname.match(/^\/team\/([^/]+)/);
-    if (teamMatch) {
-      const team = staticData?.teams.find(
-        (t) => slugify(t.name) === teamMatch[1]
-      );
-      if (!team) return [];
-      return filterByTeam(upcoming, team.id)
-        .slice(0, 100)
-        .map((p) => p.id);
-    }
-
     // Fixtures page: soonest upcoming matches, capped at one API batch
     if (location.pathname === '/fixtures') {
       return upcoming.slice(0, 100).map((p) => p.id);
@@ -63,7 +50,7 @@ function AppContent() {
     }
 
     return [];
-  }, [location.pathname, allProducts, staticData]);
+  }, [location.pathname, allProducts]);
 
   // Automatic inventory syncing (every minute for live pricing)
   useAutoInventorySync(productsToSync);
@@ -73,9 +60,8 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/fixtures" element={<FixturesPage />} />
-        <Route path="/teams" element={<TeamsPage />} />
-        <Route path="/team/:slug" element={<TeamPage />} />
         <Route path="/event/:id/:slug" element={<EventDetailPage />} />
+        <Route path="/credits" element={<CreditsPage />} />
       </Routes>
     </PageLayout>
   );

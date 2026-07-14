@@ -6,7 +6,7 @@ import {
   filterUpcomingMatches,
   sortByKickoff,
 } from '@/utils/productFilters';
-import { slugify } from '@/utils/slugify';
+import { getAccent } from '@/utils/accentColors';
 import { EventCarousel } from '@/components/EventCarousel';
 import { EventCard } from '@/components/EventCard';
 import { TrustSection } from '@/components/TrustSection';
@@ -68,12 +68,27 @@ export function HomePage() {
         <h1 className="max-w-4xl font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
           Every match.
           <br />
-          One ticket <span className="text-pitch-500">away</span>.
+          One ticket <span className="text-tangerine-500">away</span>.
         </h1>
         <p className="mt-6 max-w-xl text-lg text-ink-muted">
           Live pricing on football tickets across every competition — find your
           fixture and take your seat.
         </p>
+
+        {/* Stat pills — pops of color with real numbers */}
+        {upcomingMatches.length > 0 && (
+          <div className="mt-8 flex flex-wrap gap-3">
+            <span className="chip bg-sky-50 px-4 py-2 text-sm text-sky-700">
+              {upcomingMatches.length} matches on sale
+            </span>
+            <span className="chip bg-tangerine-50 px-4 py-2 text-sm text-tangerine-700">
+              {topTeams.length > 0 ? 'Clubs across Europe' : 'Top clubs'}
+            </span>
+            <span className="chip bg-gold-50 px-4 py-2 text-sm text-gold-700">
+              Prices refresh every minute
+            </span>
+          </div>
+        )}
 
         {/* Search */}
         <div className="mt-10 max-w-2xl">
@@ -137,7 +152,7 @@ export function HomePage() {
           )
         ) : isLoading ? (
           <div className="py-16 text-center">
-            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-pitch-500" />
+            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-ocean-500" />
             <p className="text-ink-muted">Loading upcoming matches…</p>
           </div>
         ) : (
@@ -163,19 +178,22 @@ export function HomePage() {
               Browse by team
             </h2>
             <Link
-              to="/teams"
-              className="text-sm font-semibold text-pitch-600 hover:text-pitch-700"
+              to="/fixtures"
+              className="text-sm font-semibold text-ocean-600 hover:text-ocean-700"
             >
-              All teams →
+              All fixtures →
             </Link>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             {topTeams.map((team) => (
               <Link
                 key={team.id}
-                to={`/team/${slugify(team.name)}`}
-                className="rounded-full border border-gray-200 bg-white px-5 py-3 font-display font-bold transition-colors hover:border-ink hover:bg-ink hover:text-white"
+                to={`/fixtures?team=${team.id}`}
+                className="flex items-center gap-2.5 rounded-full border border-gray-200 bg-white px-5 py-3 font-display font-bold transition-colors hover:border-ink hover:bg-ink hover:text-white"
               >
+                <span
+                  className={`h-2.5 w-2.5 rounded-full ${getAccent(team.id).dot}`}
+                />
                 {team.name}
               </Link>
             ))}

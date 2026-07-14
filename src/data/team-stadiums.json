@@ -1,0 +1,1604 @@
+{
+  "Arsenal": {
+    "card": "/images/stadiums/1001-480.webp",
+    "hero": "/images/stadiums/1001-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Manchester City": {
+    "card": "/images/stadiums/1013-480.webp",
+    "hero": "/images/stadiums/1013-960.webp",
+    "credit": "Cléria De Souza",
+    "license": "CC BY 2.0"
+  },
+  "Paris Saint-Germain": {
+    "card": "/images/stadiums/1101-480.webp",
+    "hero": "/images/stadiums/1101-960.webp",
+    "credit": "Валерий Дед",
+    "license": "CC BY 3.0"
+  },
+  "Juventus FC": {
+    "card": "/images/stadiums/1143-480.webp",
+    "hero": "/images/stadiums/1143-960.webp",
+    "credit": "forzaq8 from kuwait, kuwait",
+    "license": "CC BY 2.0"
+  },
+  "Coventry City": {
+    "card": "/images/stadiums/1169-480.webp",
+    "hero": "/images/stadiums/1169-960.webp",
+    "credit": "Julieanne Savage",
+    "license": "CC BY-SA 2.0"
+  },
+  "AC Milan": {
+    "card": "/images/stadiums/1177-480.webp",
+    "hero": "/images/stadiums/1177-960.webp",
+    "credit": "Prelvini",
+    "license": "CC BY-SA 4.0"
+  },
+  "A.J.Auxerre": {
+    "card": "/images/stadiums/1200-480.webp",
+    "hero": "/images/stadiums/1200-960.webp",
+    "credit": "Vicente Auxerre",
+    "license": "CC BY-SA 3.0"
+  },
+  "Celtic FC": {
+    "card": "/images/stadiums/1238-480.webp",
+    "hero": "/images/stadiums/1238-960.webp",
+    "credit": "Zhi Yong Lee from Glasgow, UK",
+    "license": "CC BY 2.0"
+  },
+  "Rangers FC": {
+    "card": "/images/stadiums/1241-480.webp",
+    "hero": "/images/stadiums/1241-960.webp",
+    "credit": "Archibald99",
+    "license": "Public domain"
+  },
+  "Hibernian FC": {
+    "card": "/images/stadiums/1266-480.webp",
+    "hero": "/images/stadiums/1266-960.webp",
+    "credit": "Pachiscool11",
+    "license": "CC0"
+  },
+  "Como 1907": {
+    "card": "/images/stadiums/1318-480.webp",
+    "hero": "/images/stadiums/1318-960.webp",
+    "credit": "Vale93b",
+    "license": "CC BY-SA 4.0"
+  },
+  "AFC Bournemouth": {
+    "card": "/images/stadiums/1002-480.webp",
+    "hero": "/images/stadiums/1002-960.webp",
+    "credit": "Matthew Jackson",
+    "license": "CC BY-SA 3.0"
+  },
+  "Brighton & Hove Albion": {
+    "card": "/images/stadiums/1003-480.webp",
+    "hero": "/images/stadiums/1003-960.webp",
+    "credit": "Dominic Alves from Brighton, England",
+    "license": "CC BY 2.0"
+  },
+  "Cardiff City": {
+    "card": "/images/stadiums/1005-480.webp",
+    "hero": "/images/stadiums/1005-960.webp",
+    "credit": "Jon Candy from Cardiff, Wales",
+    "license": "CC BY-SA 2.0"
+  },
+  "Crystal Palace": {
+    "card": "/images/stadiums/1007-480.webp",
+    "hero": "/images/stadiums/1007-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Huddersfield Town": {
+    "card": "/images/stadiums/1010-480.webp",
+    "hero": "/images/stadiums/1010-960.webp",
+    "credit": "@cfcunofficial (Chelsea Debs) London from London, UK",
+    "license": "CC BY-SA 2.0"
+  },
+  "Leicester City": {
+    "card": "/images/stadiums/1011-480.webp",
+    "hero": "/images/stadiums/1011-960.webp",
+    "credit": "Pottercomuneo",
+    "license": "CC BY-SA 4.0"
+  },
+  "Manchester United": {
+    "card": "/images/stadiums/1014-480.webp",
+    "hero": "/images/stadiums/1014-960.webp",
+    "credit": "Øyvind Vik",
+    "license": "Public domain"
+  },
+  "Newcastle United": {
+    "card": "/images/stadiums/1015-480.webp",
+    "hero": "/images/stadiums/1015-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Tottenham Hotspur": {
+    "card": "/images/stadiums/1017-480.webp",
+    "hero": "/images/stadiums/1017-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "West Ham United": {
+    "card": "/images/stadiums/1019-480.webp",
+    "hero": "/images/stadiums/1019-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Wolverhampton Wanderers": {
+    "card": "/images/stadiums/1020-480.webp",
+    "hero": "/images/stadiums/1020-960.webp",
+    "credit": "John Nickolls",
+    "license": "CC BY-SA 2.0"
+  },
+  "Aston Villa": {
+    "card": "/images/stadiums/1021-480.webp",
+    "hero": "/images/stadiums/1021-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Birmingham City": {
+    "card": "/images/stadiums/1022-480.webp",
+    "hero": "/images/stadiums/1022-960.webp",
+    "credit": "Bruker:TuborgLight",
+    "license": "CC BY-SA 3.0"
+  },
+  "Blackburn Rovers": {
+    "card": "/images/stadiums/1023-480.webp",
+    "hero": "/images/stadiums/1023-960.webp",
+    "credit": "Ronnie Macdonald from Chelmsford, United Kingdom",
+    "license": "CC BY 2.0"
+  },
+  "Bolton Wanderers": {
+    "card": "/images/stadiums/1024-480.webp",
+    "hero": "/images/stadiums/1024-960.webp",
+    "credit": "Mark Hammond from London, England",
+    "license": "CC BY 2.0"
+  },
+  "Bristol City": {
+    "card": "/images/stadiums/1026-480.webp",
+    "hero": "/images/stadiums/1026-960.webp",
+    "credit": "SGGH",
+    "license": "CC BY-SA 3.0"
+  },
+  "Derby County": {
+    "card": "/images/stadiums/1027-480.webp",
+    "hero": "/images/stadiums/1027-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Hull City": {
+    "card": "/images/stadiums/1028-480.webp",
+    "hero": "/images/stadiums/1028-960.webp",
+    "credit": "Paul",
+    "license": "CC BY-SA 3.0"
+  },
+  "Ipswich Town": {
+    "card": "/images/stadiums/1029-480.webp",
+    "hero": "/images/stadiums/1029-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "CC BY-SA 2.0"
+  },
+  "Leeds United": {
+    "card": "/images/stadiums/1030-480.webp",
+    "hero": "/images/stadiums/1030-960.webp",
+    "credit": "Lufc83",
+    "license": "CC BY-SA 3.0"
+  },
+  "Millwall": {
+    "card": "/images/stadiums/1032-480.webp",
+    "hero": "/images/stadiums/1032-960.webp",
+    "credit": "Richard Croft",
+    "license": "CC BY-SA 2.0"
+  },
+  "Norwich City": {
+    "card": "/images/stadiums/1033-480.webp",
+    "hero": "/images/stadiums/1033-960.webp",
+    "credit": "Mls11 at English Wikipedia",
+    "license": "Public domain"
+  },
+  "Nottingham Forest": {
+    "card": "/images/stadiums/1034-480.webp",
+    "hero": "/images/stadiums/1034-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Preston North End": {
+    "card": "/images/stadiums/1035-480.webp",
+    "hero": "/images/stadiums/1035-960.webp",
+    "credit": "Hudson6dogs",
+    "license": "CC BY-SA 3.0"
+  },
+  "Queens Park Rangers": {
+    "card": "/images/stadiums/1036-480.webp",
+    "hero": "/images/stadiums/1036-960.webp",
+    "credit": "Zakarie Faibis",
+    "license": "CC BY-SA 4.0"
+  },
+  "Rotherham United": {
+    "card": "/images/stadiums/1038-480.webp",
+    "hero": "/images/stadiums/1038-960.webp",
+    "credit": "dom fellowes from UK",
+    "license": "CC BY 2.0"
+  },
+  "Sheffield United": {
+    "card": "/images/stadiums/1039-480.webp",
+    "hero": "/images/stadiums/1039-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Sheffield Wednesday": {
+    "card": "/images/stadiums/1040-480.webp",
+    "hero": "/images/stadiums/1040-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Stoke City": {
+    "card": "/images/stadiums/1041-480.webp",
+    "hero": "/images/stadiums/1041-960.webp",
+    "credit": "Gkbediako",
+    "license": "CC BY-SA 4.0"
+  },
+  "Swansea City": {
+    "card": "/images/stadiums/1042-480.webp",
+    "hero": "/images/stadiums/1042-960.webp",
+    "credit": "Nigel Davies",
+    "license": "CC BY-SA 2.0"
+  },
+  "West Bromwich Albion": {
+    "card": "/images/stadiums/1043-480.webp",
+    "hero": "/images/stadiums/1043-960.webp",
+    "credit": "Mattd1991",
+    "license": "CC BY-SA 3.0"
+  },
+  "Wigan Athletic": {
+    "card": "/images/stadiums/1044-480.webp",
+    "hero": "/images/stadiums/1044-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Deportivo Alavés": {
+    "card": "/images/stadiums/1045-480.webp",
+    "hero": "/images/stadiums/1045-960.webp",
+    "credit": "Miguelazo84",
+    "license": "CC BY-SA 4.0"
+  },
+  "Athletic Bilbao": {
+    "card": "/images/stadiums/1046-480.webp",
+    "hero": "/images/stadiums/1046-960.webp",
+    "credit": "Валерий Дед",
+    "license": "CC BY 3.0"
+  },
+  "Atlético Madrid": {
+    "card": "/images/stadiums/1047-480.webp",
+    "hero": "/images/stadiums/1047-960.webp",
+    "credit": "BenBarek1903",
+    "license": "CC BY-SA 4.0"
+  },
+  "FC Barcelona": {
+    "card": "/images/stadiums/1048-480.webp",
+    "hero": "/images/stadiums/1048-960.webp",
+    "credit": "Amadalvarez",
+    "license": "CC BY 3.0"
+  },
+  "Celta de Vigo": {
+    "card": "/images/stadiums/1049-480.webp",
+    "hero": "/images/stadiums/1049-960.webp",
+    "credit": "Estevoaei",
+    "license": "CC BY-SA 4.0"
+  },
+  "RCD Espanyol": {
+    "card": "/images/stadiums/1051-480.webp",
+    "hero": "/images/stadiums/1051-960.webp",
+    "credit": "RCD Espanyol de Barcelona",
+    "license": "CC BY-SA 4.0"
+  },
+  "Getafe CF": {
+    "card": "/images/stadiums/1052-480.webp",
+    "hero": "/images/stadiums/1052-960.webp",
+    "credit": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0"
+  },
+  "Girona FC": {
+    "card": "/images/stadiums/1053-480.webp",
+    "hero": "/images/stadiums/1053-960.webp",
+    "credit": "Jmsolerb",
+    "license": "CC BY-SA 4.0"
+  },
+  "CD Leganés": {
+    "card": "/images/stadiums/1055-480.webp",
+    "hero": "/images/stadiums/1055-960.webp",
+    "credit": "MisterCrujiente",
+    "license": "CC BY-SA 3.0"
+  },
+  "Levante UD": {
+    "card": "/images/stadiums/1056-480.webp",
+    "hero": "/images/stadiums/1056-960.webp",
+    "credit": "Francesc Fort",
+    "license": "CC BY-SA 4.0"
+  },
+  "Rayo Vallecano": {
+    "card": "/images/stadiums/1057-480.webp",
+    "hero": "/images/stadiums/1057-960.webp",
+    "credit": "K3T0",
+    "license": "CC BY 2.5 es"
+  },
+  "Real Betis": {
+    "card": "/images/stadiums/1058-480.webp",
+    "hero": "/images/stadiums/1058-960.webp",
+    "credit": "Gregory Zeier",
+    "license": "CC BY 3.0"
+  },
+  "Real Madrid": {
+    "card": "/images/stadiums/1059-480.webp",
+    "hero": "/images/stadiums/1059-960.webp",
+    "credit": "Zoser",
+    "license": "CC BY 4.0"
+  },
+  "Real Sociedad": {
+    "card": "/images/stadiums/1060-480.webp",
+    "hero": "/images/stadiums/1060-960.webp",
+    "credit": "Bhgh543bgf",
+    "license": "CC BY-SA 4.0"
+  },
+  "Valencia CF": {
+    "card": "/images/stadiums/1062-480.webp",
+    "hero": "/images/stadiums/1062-960.webp",
+    "credit": "Valencia CF",
+    "license": "CC BY-SA 4.0"
+  },
+  "Real Valladolid": {
+    "card": "/images/stadiums/1063-480.webp",
+    "hero": "/images/stadiums/1063-960.webp",
+    "credit": "Rastrojo",
+    "license": "CC BY-SA 4.0"
+  },
+  "Villarreal CF": {
+    "card": "/images/stadiums/1064-480.webp",
+    "hero": "/images/stadiums/1064-960.webp",
+    "credit": "Oldelpaso",
+    "license": "CC BY-SA 3.0"
+  },
+  "Albacete Balompié": {
+    "card": "/images/stadiums/1065-480.webp",
+    "hero": "/images/stadiums/1065-960.webp",
+    "credit": "Alex83",
+    "license": "CC BY 3.0"
+  },
+  "UD Almería": {
+    "card": "/images/stadiums/1067-480.webp",
+    "hero": "/images/stadiums/1067-960.webp",
+    "credit": "Schumi4ever",
+    "license": "CC BY-SA 4.0"
+  },
+  "Cádiz CF": {
+    "card": "/images/stadiums/1068-480.webp",
+    "hero": "/images/stadiums/1068-960.webp",
+    "credit": "No machine-readable author provided. Jecanre assumed (based on copyright claims).",
+    "license": "Public domain"
+  },
+  "Córdoba CF": {
+    "card": "/images/stadiums/1069-480.webp",
+    "hero": "/images/stadiums/1069-960.webp",
+    "credit": "Miguelazo84",
+    "license": "CC BY-SA 4.0"
+  },
+  "Deportivo La Coruña": {
+    "card": "/images/stadiums/1070-480.webp",
+    "hero": "/images/stadiums/1070-960.webp",
+    "credit": "Albert galiza",
+    "license": "CC BY-SA 3.0"
+  },
+  "Elche CF": {
+    "card": "/images/stadiums/1071-480.webp",
+    "hero": "/images/stadiums/1071-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "GPL"
+  },
+  "Extremadura UD": {
+    "card": "/images/stadiums/1072-480.webp",
+    "hero": "/images/stadiums/1072-960.webp",
+    "credit": "Jimegar",
+    "license": "CC BY-SA 4.0"
+  },
+  "Granada CF": {
+    "card": "/images/stadiums/1074-480.webp",
+    "hero": "/images/stadiums/1074-960.webp",
+    "credit": "Granadinista",
+    "license": "CC BY-SA 4.0"
+  },
+  "UD Las Palmas": {
+    "card": "/images/stadiums/1075-480.webp",
+    "hero": "/images/stadiums/1075-960.webp",
+    "credit": "Beta15",
+    "license": "CC BY-SA 4.0"
+  },
+  "CD Lugo": {
+    "card": "/images/stadiums/1076-480.webp",
+    "hero": "/images/stadiums/1076-960.webp",
+    "credit": "Alejblanco",
+    "license": "CC BY-SA 4.0"
+  },
+  "Málaga CF": {
+    "card": "/images/stadiums/1077-480.webp",
+    "hero": "/images/stadiums/1077-960.webp",
+    "credit": "Hidalgismael",
+    "license": "CC0"
+  },
+  "RCD Mallorca": {
+    "card": "/images/stadiums/1078-480.webp",
+    "hero": "/images/stadiums/1078-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Osasuna": {
+    "card": "/images/stadiums/1080-480.webp",
+    "hero": "/images/stadiums/1080-960.webp",
+    "credit": "Pello Lopez",
+    "license": "CC BY 4.0"
+  },
+  "Real Oviedo": {
+    "card": "/images/stadiums/1081-480.webp",
+    "hero": "/images/stadiums/1081-960.webp",
+    "credit": "rsg",
+    "license": "CC BY-SA 2.5 es"
+  },
+  "Rayo Majadahonda": {
+    "card": "/images/stadiums/1082-480.webp",
+    "hero": "/images/stadiums/1082-960.webp",
+    "credit": "Medios del C.F. Rayo Majadahonda, S.A.D.",
+    "license": "CC BY-SA 4.0"
+  },
+  "Sporting de Gijón": {
+    "card": "/images/stadiums/1084-480.webp",
+    "hero": "/images/stadiums/1084-960.webp",
+    "credit": "HesselinK",
+    "license": "CC BY-SA 3.0"
+  },
+  "SM Caen": {
+    "card": "/images/stadiums/1090-480.webp",
+    "hero": "/images/stadiums/1090-960.webp",
+    "credit": "Killian Hoorelbeke",
+    "license": "CC BY-SA 3.0"
+  },
+  "Dijon FCO": {
+    "card": "/images/stadiums/1091-480.webp",
+    "hero": "/images/stadiums/1091-960.webp",
+    "credit": "Arnaud 25",
+    "license": "CC BY-SA 3.0"
+  },
+  "En Avant de Guingamp": {
+    "card": "/images/stadiums/1092-480.webp",
+    "hero": "/images/stadiums/1092-960.webp",
+    "credit": "Presko",
+    "license": "CC BY-SA 4.0"
+  },
+  "Lille OSC": {
+    "card": "/images/stadiums/1093-480.webp",
+    "hero": "/images/stadiums/1093-960.webp",
+    "credit": "Felouch Kotek",
+    "license": "CC BY-SA 4.0"
+  },
+  "Olympique Lyonnais": {
+    "card": "/images/stadiums/1094-480.webp",
+    "hero": "/images/stadiums/1094-960.webp",
+    "credit": "AsGunReview",
+    "license": "CC BY-SA 4.0"
+  },
+  "Olympique de Marseille": {
+    "card": "/images/stadiums/1095-480.webp",
+    "hero": "/images/stadiums/1095-960.webp",
+    "credit": "Bernard Ddd",
+    "license": "CC BY-SA 2.0"
+  },
+  "AS Monaco": {
+    "card": "/images/stadiums/1096-480.webp",
+    "hero": "/images/stadiums/1096-960.webp",
+    "credit": "Валерий Дед",
+    "license": "CC BY 3.0"
+  },
+  "Montpellier HSC": {
+    "card": "/images/stadiums/1097-480.webp",
+    "hero": "/images/stadiums/1097-960.webp",
+    "credit": "Ben.83",
+    "license": "CC BY-SA 3.0"
+  },
+  "FC Nantes": {
+    "card": "/images/stadiums/1098-480.webp",
+    "hero": "/images/stadiums/1098-960.webp",
+    "credit": "The original uploader was Pirmil at French Wikipedia.",
+    "license": "CC BY-SA 3.0"
+  },
+  "OGC Nice": {
+    "card": "/images/stadiums/1099-480.webp",
+    "hero": "/images/stadiums/1099-960.webp",
+    "credit": "Mirasol",
+    "license": "CC BY-SA 3.0"
+  },
+  "Nîmes Olympique": {
+    "card": "/images/stadiums/1100-480.webp",
+    "hero": "/images/stadiums/1100-960.webp",
+    "credit": "Fexedyte",
+    "license": "CC BY-SA 4.0"
+  },
+  "Stade de Reims": {
+    "card": "/images/stadiums/1102-480.webp",
+    "hero": "/images/stadiums/1102-960.webp",
+    "credit": "Wahrerwattwurm",
+    "license": "CC BY-SA 2.0 de"
+  },
+  "Stade Rennais FC": {
+    "card": "/images/stadiums/1103-480.webp",
+    "hero": "/images/stadiums/1103-960.webp",
+    "credit": "Kuso",
+    "license": "Public domain"
+  },
+  "AS Saint-Étienne": {
+    "card": "/images/stadiums/1104-480.webp",
+    "hero": "/images/stadiums/1104-960.webp",
+    "credit": "KevFB",
+    "license": "CC BY-SA 3.0"
+  },
+  "RC Strasbourg Alsace": {
+    "card": "/images/stadiums/1105-480.webp",
+    "hero": "/images/stadiums/1105-960.webp",
+    "credit": "Xaviyeah",
+    "license": "CC BY-SA 4.0"
+  },
+  "Toulouse FC": {
+    "card": "/images/stadiums/1106-480.webp",
+    "hero": "/images/stadiums/1106-960.webp",
+    "credit": "Luc-Éric Manneville Lucio fr",
+    "license": "CC BY-SA 3.0"
+  },
+  "Inter Milan": {
+    "card": "/images/stadiums/1107-480.webp",
+    "hero": "/images/stadiums/1107-960.webp",
+    "credit": "Prelvini",
+    "license": "CC BY-SA 4.0"
+  },
+  "Cincinnati Bengals": {
+    "card": "/images/stadiums/1108-480.webp",
+    "hero": "/images/stadiums/1108-960.webp",
+    "credit": "JonRidinger",
+    "license": "CC BY-SA 4.0"
+  },
+  "Los Angeles Rams": {
+    "card": "/images/stadiums/1109-480.webp",
+    "hero": "/images/stadiums/1109-960.webp",
+    "credit": "CanonStarGal",
+    "license": "CC BY-SA 4.0"
+  },
+  "Houston Texans": {
+    "card": "/images/stadiums/1110-480.webp",
+    "hero": "/images/stadiums/1110-960.webp",
+    "credit": "User eschipul on Flickr",
+    "license": "CC BY-SA 2.0"
+  },
+  "Jacksonville Jaguars": {
+    "card": "/images/stadiums/1111-480.webp",
+    "hero": "/images/stadiums/1111-960.webp",
+    "credit": "AndrewAvitus",
+    "license": "CC BY 3.0"
+  },
+  "Charlton Athletic": {
+    "card": "/images/stadiums/1113-480.webp",
+    "hero": "/images/stadiums/1113-960.webp",
+    "credit": "en:User:Superbfc",
+    "license": "CC BY-SA 3.0"
+  },
+  "Luton Town": {
+    "card": "/images/stadiums/1114-480.webp",
+    "hero": "/images/stadiums/1114-960.webp",
+    "credit": "Barry Ephgrave",
+    "license": "CC BY-SA 2.0"
+  },
+  "FC Metz": {
+    "card": "/images/stadiums/1116-480.webp",
+    "hero": "/images/stadiums/1116-960.webp",
+    "credit": "Aimelaime",
+    "license": "Public domain"
+  },
+  "Stade Brestois 29": {
+    "card": "/images/stadiums/1118-480.webp",
+    "hero": "/images/stadiums/1118-960.webp",
+    "credit": "Brestois029200",
+    "license": "CC BY-SA 3.0"
+  },
+  "Oakland Raiders": {
+    "card": "/images/stadiums/1120-480.webp",
+    "hero": "/images/stadiums/1120-960.webp",
+    "credit": "FASTILY",
+    "license": "CC BY-SA 4.0"
+  },
+  "Carolina Panthers": {
+    "card": "/images/stadiums/1121-480.webp",
+    "hero": "/images/stadiums/1121-960.webp",
+    "credit": "HangingCurve",
+    "license": "CC BY-SA 4.0"
+  },
+  "Tampa Bay Buccaneers": {
+    "card": "/images/stadiums/1122-480.webp",
+    "hero": "/images/stadiums/1122-960.webp",
+    "credit": "NASA",
+    "license": "Public domain"
+  },
+  "Dinamo Zagreb": {
+    "card": "/images/stadiums/1129-480.webp",
+    "hero": "/images/stadiums/1129-960.webp",
+    "credit": "Suradnik13",
+    "license": "CC BY-SA 4.0"
+  },
+  "FC Bayern München": {
+    "card": "/images/stadiums/1130-480.webp",
+    "hero": "/images/stadiums/1130-960.webp",
+    "credit": "Renardo la vulpo",
+    "license": "CC0"
+  },
+  "FC Red Bull Salzburg": {
+    "card": "/images/stadiums/1131-480.webp",
+    "hero": "/images/stadiums/1131-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Atalanta B.C.": {
+    "card": "/images/stadiums/1132-480.webp",
+    "hero": "/images/stadiums/1132-960.webp",
+    "credit": "Vincenzo.togni",
+    "license": "CC BY-SA 4.0"
+  },
+  "Crvena Zvezda": {
+    "card": "/images/stadiums/1133-480.webp",
+    "hero": "/images/stadiums/1133-960.webp",
+    "credit": "Isimic",
+    "license": "CC BY-SA 3.0"
+  },
+  "AFC Ajax": {
+    "card": "/images/stadiums/1134-480.webp",
+    "hero": "/images/stadiums/1134-960.webp",
+    "credit": "Alf van Beem",
+    "license": "CC0"
+  },
+  "KRC Genk": {
+    "card": "/images/stadiums/1135-480.webp",
+    "hero": "/images/stadiums/1135-960.webp",
+    "credit": "No machine-readable author provided. Hobby-Fotograf2013 assumed (based on copyright claims).",
+    "license": "CC BY-SA 3.0"
+  },
+  "Olympiakos": {
+    "card": "/images/stadiums/1137-480.webp",
+    "hero": "/images/stadiums/1137-960.webp",
+    "credit": "TodorBozhinov",
+    "license": "CC BY-SA 3.0"
+  },
+  "SSC Napoli": {
+    "card": "/images/stadiums/1138-480.webp",
+    "hero": "/images/stadiums/1138-960.webp",
+    "credit": "Gaetano Capaldo",
+    "license": "CC BY 4.0"
+  },
+  "Borussia Dortmund": {
+    "card": "/images/stadiums/1139-480.webp",
+    "hero": "/images/stadiums/1139-960.webp",
+    "credit": "Arne Müseler / www.arne-mueseler.com",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "SK Slavia Praha": {
+    "card": "/images/stadiums/1140-480.webp",
+    "hero": "/images/stadiums/1140-960.webp",
+    "credit": "Pan Hyde",
+    "license": "Public domain"
+  },
+  "Club Brugge": {
+    "card": "/images/stadiums/1141-480.webp",
+    "hero": "/images/stadiums/1141-960.webp",
+    "credit": "V&amp;A Dudush",
+    "license": "CC BY 3.0"
+  },
+  "Galatasaray": {
+    "card": "/images/stadiums/1142-480.webp",
+    "hero": "/images/stadiums/1142-960.webp",
+    "credit": "1886kusagi",
+    "license": "CC BY-SA 4.0"
+  },
+  "Bayer 04 Leverkusen": {
+    "card": "/images/stadiums/1144-480.webp",
+    "hero": "/images/stadiums/1144-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Lokomotiv Moscow": {
+    "card": "/images/stadiums/1145-480.webp",
+    "hero": "/images/stadiums/1145-960.webp",
+    "credit": "Marina Lystseva",
+    "license": "GFDL 1.2"
+  },
+  "Zenit Saint Petersburg": {
+    "card": "/images/stadiums/1146-480.webp",
+    "hero": "/images/stadiums/1146-960.webp",
+    "credit": "A.Savin",
+    "license": "FAL"
+  },
+  "RB Leipzig": {
+    "card": "/images/stadiums/1148-480.webp",
+    "hero": "/images/stadiums/1148-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "FC Astana": {
+    "card": "/images/stadiums/1149-480.webp",
+    "hero": "/images/stadiums/1149-960.webp",
+    "credit": "ChelseaFunNumberOne",
+    "license": "CC BY-SA 3.0"
+  },
+  "Partizan Belgrade": {
+    "card": "/images/stadiums/1150-480.webp",
+    "hero": "/images/stadiums/1150-960.webp",
+    "credit": "FilipBre",
+    "license": "CC BY-SA 3.0"
+  },
+  "AZ Alkmaar": {
+    "card": "/images/stadiums/1151-480.webp",
+    "hero": "/images/stadiums/1151-960.webp",
+    "credit": "Jesperverbruggen",
+    "license": "CC BY-SA 4.0"
+  },
+  "Eintracht Frankfurt": {
+    "card": "/images/stadiums/1152-480.webp",
+    "hero": "/images/stadiums/1152-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Standard Liege": {
+    "card": "/images/stadiums/1153-480.webp",
+    "hero": "/images/stadiums/1153-960.webp",
+    "credit": "Vberger",
+    "license": "Public domain"
+  },
+  "Ferencvárosi TC": {
+    "card": "/images/stadiums/1155-480.webp",
+    "hero": "/images/stadiums/1155-960.webp",
+    "credit": "Cezar Suceveanu",
+    "license": "CC BY-SA 4.0"
+  },
+  "PFC Ludogorets Razgrad": {
+    "card": "/images/stadiums/1156-480.webp",
+    "hero": "/images/stadiums/1156-960.webp",
+    "credit": "BULGARIA24",
+    "license": "CC BY-SA 4.0"
+  },
+  "Colchester United": {
+    "card": "/images/stadiums/1159-480.webp",
+    "hero": "/images/stadiums/1159-960.webp",
+    "credit": "Geographer",
+    "license": "CC BY-SA 2.0"
+  },
+  "Port Vale": {
+    "card": "/images/stadiums/1161-480.webp",
+    "hero": "/images/stadiums/1161-960.webp",
+    "credit": "User:Oldelpaso",
+    "license": "CC BY-SA 3.0"
+  },
+  "Shrewsbury Town": {
+    "card": "/images/stadiums/1164-480.webp",
+    "hero": "/images/stadiums/1164-960.webp",
+    "credit": "Alice Humphreys - transatracurium",
+    "license": "CC BY-SA 3.0"
+  },
+  "Lask": {
+    "card": "/images/stadiums/1165-480.webp",
+    "hero": "/images/stadiums/1165-960.webp",
+    "credit": "de:Benutzer:BikeMike",
+    "license": "Copyrighted free use"
+  },
+  "FC Lorient": {
+    "card": "/images/stadiums/1166-480.webp",
+    "hero": "/images/stadiums/1166-960.webp",
+    "credit": "NORMOTE",
+    "license": "CC BY-SA 4.0"
+  },
+  "RC Lens": {
+    "card": "/images/stadiums/1167-480.webp",
+    "hero": "/images/stadiums/1167-960.webp",
+    "credit": "Liondartois",
+    "license": "CC BY-SA 4.0"
+  },
+  "Peterborough United": {
+    "card": "/images/stadiums/1170-480.webp",
+    "hero": "/images/stadiums/1170-960.webp",
+    "credit": "Rodney Burton",
+    "license": "CC BY-SA 2.0"
+  },
+  "FC Pacos de Ferreira": {
+    "card": "/images/stadiums/1174-480.webp",
+    "hero": "/images/stadiums/1174-960.webp",
+    "credit": "JP Ribeiro",
+    "license": "CC BY-SA 4.0"
+  },
+  "AFC Wimbledon": {
+    "card": "/images/stadiums/1175-480.webp",
+    "hero": "/images/stadiums/1175-960.webp",
+    "credit": "Adam Procter",
+    "license": "CC BY-SA 2.0"
+  },
+  "Wycombe Wanderers": {
+    "card": "/images/stadiums/1176-480.webp",
+    "hero": "/images/stadiums/1176-960.webp",
+    "credit": "DipsyDave",
+    "license": "CC BY-SA 3.0"
+  },
+  "FC Porto": {
+    "card": "/images/stadiums/1178-480.webp",
+    "hero": "/images/stadiums/1178-960.webp",
+    "credit": "Edgar Jiménez from Porto, Portugal",
+    "license": "CC BY-SA 2.0"
+  },
+  "Malmo FF": {
+    "card": "/images/stadiums/1179-480.webp",
+    "hero": "/images/stadiums/1179-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "FC Zenit": {
+    "card": "/images/stadiums/1180-480.webp",
+    "hero": "/images/stadiums/1180-960.webp",
+    "credit": "A.Savin",
+    "license": "FAL"
+  },
+  "Young Boys": {
+    "card": "/images/stadiums/1181-480.webp",
+    "hero": "/images/stadiums/1181-960.webp",
+    "credit": "M.A.",
+    "license": "Public domain"
+  },
+  "FC Sheriff Tiraspol": {
+    "card": "/images/stadiums/1182-480.webp",
+    "hero": "/images/stadiums/1182-960.webp",
+    "credit": "Julian Nyča",
+    "license": "CC BY-SA 4.0"
+  },
+  "VfL Wolfsburg": {
+    "card": "/images/stadiums/1184-480.webp",
+    "hero": "/images/stadiums/1184-960.webp",
+    "credit": "Saubär",
+    "license": "CC BY-SA 3.0"
+  },
+  "Vitesse": {
+    "card": "/images/stadiums/1186-480.webp",
+    "hero": "/images/stadiums/1186-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0"
+  },
+  "Cambridge United": {
+    "card": "/images/stadiums/1192-480.webp",
+    "hero": "/images/stadiums/1192-960.webp",
+    "credit": "CU4ever",
+    "license": "CC BY-SA 3.0"
+  },
+  "Sporting CP": {
+    "card": "/images/stadiums/1193-480.webp",
+    "hero": "/images/stadiums/1193-960.webp",
+    "credit": "Megutim",
+    "license": "CC BY 4.0"
+  },
+  "Plymouth Argyle": {
+    "card": "/images/stadiums/1194-480.webp",
+    "hero": "/images/stadiums/1194-960.webp",
+    "credit": "Euanargyle",
+    "license": "CC BY-SA 4.0"
+  },
+  "Hartlepool": {
+    "card": "/images/stadiums/1195-480.webp",
+    "hero": "/images/stadiums/1195-960.webp",
+    "credit": "amby fogerty",
+    "license": "CC BY-SA 2.0"
+  },
+  "Denver Broncos": {
+    "card": "/images/stadiums/1198-480.webp",
+    "hero": "/images/stadiums/1198-960.webp",
+    "credit": "Thelastcanadian",
+    "license": "CC BY-SA 3.0"
+  },
+  "AS Roma": {
+    "card": "/images/stadiums/1199-480.webp",
+    "hero": "/images/stadiums/1199-960.webp",
+    "credit": "Blackcat",
+    "license": "CC BY-SA 3.0 it"
+  },
+  "AC Ajaccio": {
+    "card": "/images/stadiums/1201-480.webp",
+    "hero": "/images/stadiums/1201-960.webp",
+    "credit": "Gael13011",
+    "license": "CC BY-SA 3.0"
+  },
+  "Borussia Mönchengladbach": {
+    "card": "/images/stadiums/1202-480.webp",
+    "hero": "/images/stadiums/1202-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "VFB Stuttgart": {
+    "card": "/images/stadiums/1203-480.webp",
+    "hero": "/images/stadiums/1203-960.webp",
+    "credit": "Xocolatl (talk) 09:17, 21 June 2011 (UTC)",
+    "license": "CC0"
+  },
+  "SC Freiburg": {
+    "card": "/images/stadiums/1204-480.webp",
+    "hero": "/images/stadiums/1204-960.webp",
+    "credit": "Markus Unger from Vienna, Austria",
+    "license": "CC BY 2.0"
+  },
+  "SV Werder Bremen": {
+    "card": "/images/stadiums/1206-480.webp",
+    "hero": "/images/stadiums/1206-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 4.0"
+  },
+  "1. FC Köln": {
+    "card": "/images/stadiums/1207-480.webp",
+    "hero": "/images/stadiums/1207-960.webp",
+    "credit": "Maximilian Zarbl",
+    "license": "CC BY-SA 3.0"
+  },
+  "VFL Bochum": {
+    "card": "/images/stadiums/1208-480.webp",
+    "hero": "/images/stadiums/1208-960.webp",
+    "credit": "Vonovia",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Union Berlin": {
+    "card": "/images/stadiums/1209-480.webp",
+    "hero": "/images/stadiums/1209-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "FC Augsburg": {
+    "card": "/images/stadiums/1210-480.webp",
+    "hero": "/images/stadiums/1210-960.webp",
+    "credit": "Futbol vic",
+    "license": "CC BY-SA 3.0"
+  },
+  "TSG 1899 Hoffenheim": {
+    "card": "/images/stadiums/1211-480.webp",
+    "hero": "/images/stadiums/1211-960.webp",
+    "credit": "Photographs by Radosław Drożdżewski (User:Zwiadowca21)",
+    "license": "CC BY-SA 4.0"
+  },
+  "FC Schalke 04": {
+    "card": "/images/stadiums/1213-480.webp",
+    "hero": "/images/stadiums/1213-960.webp",
+    "credit": "Frank Vincentz",
+    "license": "CC BY-SA 3.0"
+  },
+  "Udinese Calcio": {
+    "card": "/images/stadiums/1214-480.webp",
+    "hero": "/images/stadiums/1214-960.webp",
+    "credit": "Matteo.favi",
+    "license": "CC BY-SA 4.0"
+  },
+  "Bologna FC 1909": {
+    "card": "/images/stadiums/1215-480.webp",
+    "hero": "/images/stadiums/1215-960.webp",
+    "credit": "Beric Dondarrion",
+    "license": "CC BY-SA 4.0"
+  },
+  "AC Monza": {
+    "card": "/images/stadiums/1216-480.webp",
+    "hero": "/images/stadiums/1216-960.webp",
+    "credit": "Simonemb",
+    "license": "CC0"
+  },
+  "Spezia Calcio": {
+    "card": "/images/stadiums/1217-480.webp",
+    "hero": "/images/stadiums/1217-960.webp",
+    "credit": "IVSP1972",
+    "license": "CC BY-SA 4.0"
+  },
+  "ACF Fiorentina": {
+    "card": "/images/stadiums/1218-480.webp",
+    "hero": "/images/stadiums/1218-960.webp",
+    "credit": "Sailko",
+    "license": "CC BY 3.0"
+  },
+  "U.S. Sassuolo": {
+    "card": "/images/stadiums/1219-480.webp",
+    "hero": "/images/stadiums/1219-960.webp",
+    "credit": "Vincenzo.togni",
+    "license": "CC BY 4.0"
+  },
+  "Torino FC": {
+    "card": "/images/stadiums/1220-480.webp",
+    "hero": "/images/stadiums/1220-960.webp",
+    "credit": "Asgaw",
+    "license": "CC BY-SA 4.0"
+  },
+  "U.S. Salernitana 1919": {
+    "card": "/images/stadiums/1221-480.webp",
+    "hero": "/images/stadiums/1221-960.webp",
+    "credit": "Madip86",
+    "license": "CC0"
+  },
+  "Empoli FC": {
+    "card": "/images/stadiums/1222-480.webp",
+    "hero": "/images/stadiums/1222-960.webp",
+    "credit": "Luca Aless",
+    "license": "CC BY-SA 4.0"
+  },
+  "U.S. Lecce": {
+    "card": "/images/stadiums/1223-480.webp",
+    "hero": "/images/stadiums/1223-960.webp",
+    "credit": "ParisTaras",
+    "license": "CC BY-SA 4.0"
+  },
+  "U.S. Cremonese": {
+    "card": "/images/stadiums/1224-480.webp",
+    "hero": "/images/stadiums/1224-960.webp",
+    "credit": "Vale93b",
+    "license": "CC BY-SA 4.0"
+  },
+  "S.S. Lazio": {
+    "card": "/images/stadiums/1225-480.webp",
+    "hero": "/images/stadiums/1225-960.webp",
+    "credit": "ildirettore",
+    "license": "CC BY 3.0"
+  },
+  "U.C. Sampdoria": {
+    "card": "/images/stadiums/1226-480.webp",
+    "hero": "/images/stadiums/1226-960.webp",
+    "credit": "Stefano Delfrate",
+    "license": "CC BY-SA 2.0"
+  },
+  "Hellas Verona FC": {
+    "card": "/images/stadiums/1227-480.webp",
+    "hero": "/images/stadiums/1227-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "New Orleans Saints": {
+    "card": "/images/stadiums/1232-480.webp",
+    "hero": "/images/stadiums/1232-960.webp",
+    "credit": "Infrogmation of New Orleans",
+    "license": "CC BY-SA 3.0"
+  },
+  "Minnesota Vikings": {
+    "card": "/images/stadiums/1233-480.webp",
+    "hero": "/images/stadiums/1233-960.webp",
+    "credit": "snaebyllej2",
+    "license": "CC BY 2.0"
+  },
+  "New York Giants": {
+    "card": "/images/stadiums/1235-480.webp",
+    "hero": "/images/stadiums/1235-960.webp",
+    "credit": "babyknight",
+    "license": "CC BY 2.0"
+  },
+  "FC Viktoria Plzeň": {
+    "card": "/images/stadiums/1236-480.webp",
+    "hero": "/images/stadiums/1236-960.webp",
+    "credit": "Jakub Valeš",
+    "license": "CC BY-SA 4.0"
+  },
+  "FC Copenhagen": {
+    "card": "/images/stadiums/1239-480.webp",
+    "hero": "/images/stadiums/1239-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Maccabi Haifa FC": {
+    "card": "/images/stadiums/1240-480.webp",
+    "hero": "/images/stadiums/1240-960.webp",
+    "credit": "Zvi Roger",
+    "license": "CC BY 3.0"
+  },
+  "AC Omonia": {
+    "card": "/images/stadiums/1242-480.webp",
+    "hero": "/images/stadiums/1242-960.webp",
+    "credit": "GSP\n\n(Life time: 1910)",
+    "license": "Public domain"
+  },
+  "PSV Eindhoven": {
+    "card": "/images/stadiums/1243-480.webp",
+    "hero": "/images/stadiums/1243-960.webp",
+    "credit": "TaraO",
+    "license": "CC BY 2.5"
+  },
+  "FK Bodo/Glimt": {
+    "card": "/images/stadiums/1244-480.webp",
+    "hero": "/images/stadiums/1244-960.webp",
+    "credit": "Røed",
+    "license": "CC BY-SA 2.5"
+  },
+  "Brazil Women's": {
+    "card": "/images/stadiums/1246-480.webp",
+    "hero": "/images/stadiums/1246-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Fenerbahçe S.K.": {
+    "card": "/images/stadiums/1249-480.webp",
+    "hero": "/images/stadiums/1249-960.webp",
+    "credit": "Anl55400",
+    "license": "CC BY-SA 4.0"
+  },
+  "Atlanta Falcons": {
+    "card": "/images/stadiums/1251-480.webp",
+    "hero": "/images/stadiums/1251-960.webp",
+    "credit": "Latics",
+    "license": "CC BY-SA 3.0"
+  },
+  "Buffalo Bills": {
+    "card": "/images/stadiums/1252-480.webp",
+    "hero": "/images/stadiums/1252-960.webp",
+    "credit": "User Evilarry on en.wikipedia",
+    "license": "Public domain"
+  },
+  "Baltimore Ravens": {
+    "card": "/images/stadiums/1253-480.webp",
+    "hero": "/images/stadiums/1253-960.webp",
+    "credit": "United States Department of Defense Cherie Cullen",
+    "license": "Public domain"
+  },
+  "Tennessee Titans": {
+    "card": "/images/stadiums/1254-480.webp",
+    "hero": "/images/stadiums/1254-960.webp",
+    "credit": "Kaldari",
+    "license": "CC0"
+  },
+  "Le Havre Athletic Club": {
+    "card": "/images/stadiums/1256-480.webp",
+    "hero": "/images/stadiums/1256-960.webp",
+    "credit": "LG96",
+    "license": "CC BY-SA 3.0"
+  },
+  "Frosinone Calcio": {
+    "card": "/images/stadiums/1257-480.webp",
+    "hero": "/images/stadiums/1257-960.webp",
+    "credit": "Simone Perciballi",
+    "license": "CC BY-SA 4.0"
+  },
+  "Genoa CFC": {
+    "card": "/images/stadiums/1258-480.webp",
+    "hero": "/images/stadiums/1258-960.webp",
+    "credit": "Stefano Delfrate",
+    "license": "CC BY-SA 2.0"
+  },
+  "Cagliari Calcio": {
+    "card": "/images/stadiums/1259-480.webp",
+    "hero": "/images/stadiums/1259-960.webp",
+    "credit": "Sandrino 14",
+    "license": "CC BY-SA 4.0"
+  },
+  "SV Darmstadt 98": {
+    "card": "/images/stadiums/1261-480.webp",
+    "hero": "/images/stadiums/1261-960.webp",
+    "credit": "Thorsten Halm",
+    "license": "CC BY-SA 3.0"
+  },
+  "Heart of Midlothian": {
+    "card": "/images/stadiums/1269-480.webp",
+    "hero": "/images/stadiums/1269-960.webp",
+    "credit": "daniel0685",
+    "license": "CC BY 2.0"
+  },
+  "St. Johnstone": {
+    "card": "/images/stadiums/1270-480.webp",
+    "hero": "/images/stadiums/1270-960.webp",
+    "credit": "en:User:Xizor75",
+    "license": "Public domain"
+  },
+  "St. Mirren": {
+    "card": "/images/stadiums/1271-480.webp",
+    "hero": "/images/stadiums/1271-960.webp",
+    "credit": "Thomas Nugent",
+    "license": "CC BY-SA 2.0"
+  },
+  "Arsenal Women": {
+    "card": "/images/stadiums/1275-480.webp",
+    "hero": "/images/stadiums/1275-960.webp",
+    "credit": "Matt Churchill",
+    "license": "CC BY 2.0"
+  },
+  "Aston Villa Women": {
+    "card": "/images/stadiums/1277-480.webp",
+    "hero": "/images/stadiums/1277-960.webp",
+    "credit": "MikeMetaled at English Wikipedia",
+    "license": "Public domain"
+  },
+  "Manchester United Women": {
+    "card": "/images/stadiums/1279-480.webp",
+    "hero": "/images/stadiums/1279-960.webp",
+    "credit": "Dave Green",
+    "license": "CC BY-SA 2.0"
+  },
+  "Tottenham Hotspur Women": {
+    "card": "/images/stadiums/1280-480.webp",
+    "hero": "/images/stadiums/1280-960.webp",
+    "credit": "Chris Eason from London",
+    "license": "CC BY 2.0"
+  },
+  "Crewe Alexandra": {
+    "card": "/images/stadiums/1281-480.webp",
+    "hero": "/images/stadiums/1281-960.webp",
+    "credit": "Andrew Smith",
+    "license": "CC BY-SA 2.0"
+  },
+  "Stockport County": {
+    "card": "/images/stadiums/1282-480.webp",
+    "hero": "/images/stadiums/1282-960.webp",
+    "credit": "[1]",
+    "license": "CC BY-SA 3.0"
+  },
+  "Forest Green Rovers": {
+    "card": "/images/stadiums/1283-480.webp",
+    "hero": "/images/stadiums/1283-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "Public domain"
+  },
+  "Tranmere Rovers": {
+    "card": "/images/stadiums/1284-480.webp",
+    "hero": "/images/stadiums/1284-960.webp",
+    "credit": "Curttrfc at English Wikipedia",
+    "license": "Public domain"
+  },
+  "Bradford City": {
+    "card": "/images/stadiums/1285-480.webp",
+    "hero": "/images/stadiums/1285-960.webp",
+    "credit": "David Ingham",
+    "license": "CC BY-SA 2.0"
+  },
+  "Accrington Stanley": {
+    "card": "/images/stadiums/1286-480.webp",
+    "hero": "/images/stadiums/1286-960.webp",
+    "credit": "robert wade",
+    "license": "CC BY-SA 2.0"
+  },
+  "Doncaster Rovers": {
+    "card": "/images/stadiums/1287-480.webp",
+    "hero": "/images/stadiums/1287-960.webp",
+    "credit": "Frees",
+    "license": "CC BY 3.0"
+  },
+  "Notts County": {
+    "card": "/images/stadiums/1288-480.webp",
+    "hero": "/images/stadiums/1288-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Swindon Town": {
+    "card": "/images/stadiums/1289-480.webp",
+    "hero": "/images/stadiums/1289-960.webp",
+    "credit": "Swindonx at English Wikipedia",
+    "license": "Public domain"
+  },
+  "Sutton United": {
+    "card": "/images/stadiums/1290-480.webp",
+    "hero": "/images/stadiums/1290-960.webp",
+    "credit": "Areedef at English Wikipedia",
+    "license": "Public domain"
+  },
+  "Crawley Town": {
+    "card": "/images/stadiums/1292-480.webp",
+    "hero": "/images/stadiums/1292-960.webp",
+    "credit": "Hassocks5489 at English Wikipedia",
+    "license": "Public domain"
+  },
+  "Mansfield Town": {
+    "card": "/images/stadiums/1293-480.webp",
+    "hero": "/images/stadiums/1293-960.webp",
+    "credit": "Steve Daniels",
+    "license": "CC BY-SA 2.0"
+  },
+  "MK Dons": {
+    "card": "/images/stadiums/1296-480.webp",
+    "hero": "/images/stadiums/1296-960.webp",
+    "credit": "Jamie Smith",
+    "license": "CC BY-SA 3.0"
+  },
+  "Harrogate Town": {
+    "card": "/images/stadiums/1299-480.webp",
+    "hero": "/images/stadiums/1299-960.webp",
+    "credit": "Mtaylor848",
+    "license": "CC BY-SA 3.0"
+  },
+  "Salford City": {
+    "card": "/images/stadiums/1300-480.webp",
+    "hero": "/images/stadiums/1300-960.webp",
+    "credit": "Jonny Keen",
+    "license": "CC BY-SA 4.0"
+  },
+  "S.C. Braga": {
+    "card": "/images/stadiums/1303-480.webp",
+    "hero": "/images/stadiums/1303-960.webp",
+    "credit": "Manuel Anastácio uploaded 2004-08-17",
+    "license": "CC BY-SA 3.0"
+  },
+  "Feyenoord Rotterdam": {
+    "card": "/images/stadiums/1304-480.webp",
+    "hero": "/images/stadiums/1304-960.webp",
+    "credit": "Author and original uploader was ART at nl.wikipedia",
+    "license": "Public domain"
+  },
+  "Union Saint Gilloise": {
+    "card": "/images/stadiums/1305-480.webp",
+    "hero": "/images/stadiums/1305-960.webp",
+    "credit": "MM1912",
+    "license": "CC BY 4.0"
+  },
+  "Lincoln City": {
+    "card": "/images/stadiums/1309-480.webp",
+    "hero": "/images/stadiums/1309-960.webp",
+    "credit": "Differentgravy at English Wikipedia",
+    "license": "CC BY-SA 3.0"
+  },
+  "Carlisle United": {
+    "card": "/images/stadiums/1310-480.webp",
+    "hero": "/images/stadiums/1310-960.webp",
+    "credit": "Jameboy",
+    "license": "CC BY-SA 3.0"
+  },
+  "Manchester City Women": {
+    "card": "/images/stadiums/1313-480.webp",
+    "hero": "/images/stadiums/1313-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Sparta Praha": {
+    "card": "/images/stadiums/1314-480.webp",
+    "hero": "/images/stadiums/1314-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "CC BY-SA 2.5"
+  },
+  "New England Patriots": {
+    "card": "/images/stadiums/1315-480.webp",
+    "hero": "/images/stadiums/1315-960.webp",
+    "credit": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0"
+  },
+  "New York Jets": {
+    "card": "/images/stadiums/1317-480.webp",
+    "hero": "/images/stadiums/1317-960.webp",
+    "credit": "babyknight",
+    "license": "CC BY 2.0"
+  },
+  "Parma Calcio 1913": {
+    "card": "/images/stadiums/1319-480.webp",
+    "hero": "/images/stadiums/1319-960.webp",
+    "credit": "Brodolò1",
+    "license": "CC0"
+  },
+  "Venezia FC": {
+    "card": "/images/stadiums/1320-480.webp",
+    "hero": "/images/stadiums/1320-960.webp",
+    "credit": "kallerna",
+    "license": "CC BY-SA 4.0"
+  },
+  "FC St. Pauli": {
+    "card": "/images/stadiums/1321-480.webp",
+    "hero": "/images/stadiums/1321-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Holstein Kiel": {
+    "card": "/images/stadiums/1322-480.webp",
+    "hero": "/images/stadiums/1322-960.webp",
+    "credit": "Ichwarsnur",
+    "license": "CC BY-SA 4.0"
+  },
+  "Oxford United": {
+    "card": "/images/stadiums/1323-480.webp",
+    "hero": "/images/stadiums/1323-960.webp",
+    "credit": "Nigel Cox",
+    "license": "CC BY-SA 2.0"
+  },
+  "Dundee United": {
+    "card": "/images/stadiums/1324-480.webp",
+    "hero": "/images/stadiums/1324-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0"
+  },
+  "Servette": {
+    "card": "/images/stadiums/1325-480.webp",
+    "hero": "/images/stadiums/1325-960.webp",
+    "credit": "Vincenzo.togni",
+    "license": "CC BY 4.0"
+  },
+  "Everton Women": {
+    "card": "/images/stadiums/1326-480.webp",
+    "hero": "/images/stadiums/1326-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "FC Barcelona  Women": {
+    "card": "/images/stadiums/1328-480.webp",
+    "hero": "/images/stadiums/1328-960.webp",
+    "credit": "Wilnel José Verdú Guerrero",
+    "license": "CC BY-SA 4.0"
+  },
+  "Atlético de Madrid Women": {
+    "card": "/images/stadiums/1340-480.webp",
+    "hero": "/images/stadiums/1340-960.webp",
+    "credit": "Medios del C.F. Rayo Majadahonda, S.A.D.",
+    "license": "CC BY-SA 4.0"
+  },
+  "S.K. Slovan Bratislava": {
+    "card": "/images/stadiums/1344-480.webp",
+    "hero": "/images/stadiums/1344-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "FK Crvena Zvezda": {
+    "card": "/images/stadiums/1345-480.webp",
+    "hero": "/images/stadiums/1345-960.webp",
+    "credit": "Isimic",
+    "license": "CC BY-SA 3.0"
+  },
+  "Red Star Belgrade": {
+    "card": "/images/stadiums/1346-480.webp",
+    "hero": "/images/stadiums/1346-960.webp",
+    "credit": "Isimic",
+    "license": "CC BY-SA 3.0"
+  },
+  "Paok FC": {
+    "card": "/images/stadiums/1347-480.webp",
+    "hero": "/images/stadiums/1347-960.webp",
+    "credit": "Эдгар Брещанов",
+    "license": "CC BY-SA 3.0"
+  },
+  "FC Twente": {
+    "card": "/images/stadiums/1348-480.webp",
+    "hero": "/images/stadiums/1348-960.webp",
+    "credit": "Mark92 at nl.wikipedia",
+    "license": "CC BY-SA 3.0"
+  },
+  "IF Elfsborg": {
+    "card": "/images/stadiums/1350-480.webp",
+    "hero": "/images/stadiums/1350-960.webp",
+    "credit": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0"
+  },
+  "Fotbal Club FCSB": {
+    "card": "/images/stadiums/1351-480.webp",
+    "hero": "/images/stadiums/1351-960.webp",
+    "credit": "Nowy Styl Group",
+    "license": "CC BY-SA 4.0"
+  },
+  "SK Sturm Graz": {
+    "card": "/images/stadiums/1353-480.webp",
+    "hero": "/images/stadiums/1353-960.webp",
+    "credit": "Thomas Ledl",
+    "license": "CC BY 4.0"
+  },
+  "Panathinaikos": {
+    "card": "/images/stadiums/1355-480.webp",
+    "hero": "/images/stadiums/1355-960.webp",
+    "credit": "Sportingn",
+    "license": "Public domain"
+  },
+  "Shamrock Rovers": {
+    "card": "/images/stadiums/1356-480.webp",
+    "hero": "/images/stadiums/1356-960.webp",
+    "credit": "William Murphy",
+    "license": "CC BY-SA 2.0"
+  },
+  "FC Noah": {
+    "card": "/images/stadiums/1357-480.webp",
+    "hero": "/images/stadiums/1357-960.webp",
+    "credit": "Avdav",
+    "license": "CC BY-SA 3.0"
+  },
+  "RSC Anderlecht": {
+    "card": "/images/stadiums/1358-480.webp",
+    "hero": "/images/stadiums/1358-960.webp",
+    "credit": "Dirk Grosemans at Dutch Wikipedia\n\n(Original text: dirk grosemans)",
+    "license": "Public domain"
+  },
+  "Legia Warsaw": {
+    "card": "/images/stadiums/1360-480.webp",
+    "hero": "/images/stadiums/1360-960.webp",
+    "credit": "Валерий Дед",
+    "license": "CC BY 3.0"
+  },
+  "Djurgardens IF": {
+    "card": "/images/stadiums/1361-480.webp",
+    "hero": "/images/stadiums/1361-960.webp",
+    "credit": "Johannes Scherman",
+    "license": "CC BY 2.5"
+  },
+  "Cleveland Browns": {
+    "card": "/images/stadiums/1362-480.webp",
+    "hero": "/images/stadiums/1362-960.webp",
+    "credit": "Wasted Time R (talk)",
+    "license": "CC BY 3.0"
+  },
+  "Paris FC": {
+    "card": "/images/stadiums/1363-480.webp",
+    "hero": "/images/stadiums/1363-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Hamburger SV": {
+    "card": "/images/stadiums/1364-480.webp",
+    "hero": "/images/stadiums/1364-960.webp",
+    "credit": "Reinhard Kraasch",
+    "license": "CC BY-SA 4.0"
+  },
+  "Pisa SC": {
+    "card": "/images/stadiums/1365-480.webp",
+    "hero": "/images/stadiums/1365-960.webp",
+    "credit": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de"
+  },
+  "Burton Albion": {
+    "card": "/images/stadiums/1366-480.webp",
+    "hero": "/images/stadiums/1366-960.webp",
+    "credit": "Alan Slater",
+    "license": "CC BY-SA 2.0"
+  },
+  "Exeter City": {
+    "card": "/images/stadiums/1367-480.webp",
+    "hero": "/images/stadiums/1367-960.webp",
+    "credit": "Alonstoter",
+    "license": "CC0"
+  },
+  "Leyton Orient": {
+    "card": "/images/stadiums/1368-480.webp",
+    "hero": "/images/stadiums/1368-960.webp",
+    "credit": "Chris Eason from London",
+    "license": "CC BY 2.0"
+  },
+  "Northampton Town": {
+    "card": "/images/stadiums/1369-480.webp",
+    "hero": "/images/stadiums/1369-960.webp",
+    "credit": "Dwadfish at English Wikipedia",
+    "license": "Public domain"
+  },
+  "FC Kairat Almaty": {
+    "card": "/images/stadiums/1373-480.webp",
+    "hero": "/images/stadiums/1373-960.webp",
+    "credit": "t_y_l",
+    "license": "CC BY-SA 2.0"
+  },
+  "Maccabi Tel Aviv": {
+    "card": "/images/stadiums/1374-480.webp",
+    "hero": "/images/stadiums/1374-960.webp",
+    "credit": "Little Savage",
+    "license": "CC BY-SA 4.0"
+  },
+  "FC MIDTJYLLAND": {
+    "card": "/images/stadiums/1375-480.webp",
+    "hero": "/images/stadiums/1375-960.webp",
+    "credit": "EUpdates",
+    "license": "CC BY-SA 4.0"
+  },
+  "Leicester City Women": {
+    "card": "/images/stadiums/1376-480.webp",
+    "hero": "/images/stadiums/1376-960.webp",
+    "credit": "Pottercomuneo",
+    "license": "CC BY-SA 4.0"
+  },
+  "West Ham United Women": {
+    "card": "/images/stadiums/1377-480.webp",
+    "hero": "/images/stadiums/1377-960.webp",
+    "credit": "David Ingham from Lancashire, England",
+    "license": "CC BY-SA 2.0"
+  },
+  "Real Racing Club": {
+    "card": "/images/stadiums/1378-480.webp",
+    "hero": "/images/stadiums/1378-960.webp",
+    "credit": "Maria Victoria Gomez Fernandez",
+    "license": "CC BY 2.5"
+  },
+  "SV Elversberg": {
+    "card": "/images/stadiums/1379-480.webp",
+    "hero": "/images/stadiums/1379-960.webp",
+    "credit": "Bj.Linnebach",
+    "license": "CC BY 3.0"
+  },
+  "SC Paderborn": {
+    "card": "/images/stadiums/1380-480.webp",
+    "hero": "/images/stadiums/1380-960.webp",
+    "credit": "Ungry Young Man from Vienna, Austria",
+    "license": "CC BY 2.0"
+  }
+}

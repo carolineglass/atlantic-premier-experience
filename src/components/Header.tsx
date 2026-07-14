@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import {
+  CompetitionsMenu,
+  MobileCompetitions,
+} from './CompetitionsMenu';
 
-const NAV_ITEMS = [
-  { to: '/fixtures', label: 'Fixtures' },
-  { to: '/teams', label: 'Teams' },
-];
+const NAV_ITEMS = [{ to: '/fixtures', label: 'Fixtures' }];
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ export function Header() {
           onClick={() => setMenuOpen(false)}
         >
           Atlantic
-          <span className="inline-block h-2.5 w-2.5 rotate-45 rounded-[3px] bg-pitch-500" />
+          <span className="inline-block h-2.5 w-2.5 rotate-45 rounded-[3px] bg-ocean-500" />
         </Link>
 
         {/* Desktop nav */}
@@ -38,9 +39,10 @@ export function Header() {
               {item.label}
             </NavLink>
           ))}
+          <CompetitionsMenu />
           <Link
-            to="/fixtures"
-            className="ml-2 inline-flex items-center gap-2 rounded-full bg-pitch-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-pitch-600"
+            to="/fixtures?focus=search"
+            className="ml-2 inline-flex items-center gap-2 rounded-full bg-ocean-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-ocean-600"
           >
             <svg
               className="h-4 w-4"
@@ -108,6 +110,7 @@ export function Header() {
               {item.label}
             </NavLink>
           ))}
+          <MobileCompetitions onNavigate={() => setMenuOpen(false)} />
         </nav>
       )}
     </header>

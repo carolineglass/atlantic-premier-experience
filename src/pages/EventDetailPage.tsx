@@ -9,6 +9,8 @@ import {
 } from '@/utils/dateFormatters';
 import { SeatingChart } from '@/components/SeatingChart';
 import { InteractiveSeatMap } from '@/components/InteractiveSeatMap';
+import { getAccent } from '@/utils/accentColors';
+import { getStadiumImage } from '@/utils/stadiumImages';
 
 // TODO(production): remove this prototype gate before deploying to production.
 // The sandbox API returns empty seating_plan for every product, so Celtic Park
@@ -43,8 +45,8 @@ export function EventDetailPage() {
     const el = document.querySelector(`[data-ticket-category="${categoryId}"]`);
     if (!el) return;
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    el.classList.add('ring-2', 'ring-pitch-500');
-    setTimeout(() => el.classList.remove('ring-2', 'ring-pitch-500'), 1600);
+    el.classList.add('ring-2', 'ring-ocean-500');
+    setTimeout(() => el.classList.remove('ring-2', 'ring-ocean-500'), 1600);
   }, []);
 
   // Wait for all data to load
@@ -52,7 +54,7 @@ export function EventDetailPage() {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-pitch-500" />
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-ocean-500" />
           <p className="text-ink-muted">Loading event details…</p>
         </div>
       </div>
@@ -140,78 +142,124 @@ export function EventDetailPage() {
       <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Main Content */}
         <div className="space-y-6 lg:col-span-2">
-          {/* Match Header */}
-          <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-card">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="chip bg-gray-100 text-ink-soft">
-                {competitionName || `Competition ${product.match.competition}`}
-              </span>
-              <span
-                className={`chip ${
-                  product.match.status === 'Upcoming'
-                    ? 'bg-pitch-50 text-pitch-700'
-                    : 'bg-red-50 text-red-700'
-                }`}
-              >
-                {product.match.status}
-              </span>
-            </div>
-
-            <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl">
-              {homeTeamName}
-              <span className="block text-xl font-medium text-ink-muted md:text-2xl">
-                v
-              </span>
-              {awayTeamName}
-            </h1>
-
-            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-ink-soft">
-              <div className="flex items-center gap-2">
-                <svg
-                  className="h-5 w-5 text-ink-muted"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+          {/* Match Header — stadium-photo backdrop when a freely-licensed
+              photo of the home ground exists (CC attribution shown below) */}
+          {(() => {
+            const stadium = getStadiumImage(homeTeamName);
+            const hasPhoto = Boolean(stadium);
+            return (
+              <div>
+                <div
+                  className={`relative overflow-hidden rounded-3xl border shadow-card ${
+                    hasPhoto ? 'border-navy' : 'border-gray-200 bg-white'
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <span>
-                  {formattedDate} · {formattedTime}
-                </span>
+                  {stadium && (
+                    <>
+                      <img
+                        src={stadium.hero}
+                        alt={`Home stadium of ${homeTeamName}`}
+                        className="absolute inset-0 h-full w-full object-cover saturate-[.85]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/30" />
+                    </>
+                  )}
+                  <div className="relative p-8">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span
+                        className={`chip ${getAccent(product.match.competition).chip}`}
+                      >
+                        {competitionName ||
+                          `Competition ${product.match.competition}`}
+                      </span>
+                      <span
+                        className={`chip ${
+                          product.match.status === 'Upcoming'
+                            ? 'bg-ocean-50 text-ocean-700'
+                            : 'bg-red-50 text-red-700'
+                        }`}
+                      >
+                        {product.match.status}
+                      </span>
+                    </div>
+
+                    <h1
+                      className={`mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl ${
+                        hasPhoto ? 'text-white' : ''
+                      }`}
+                    >
+                      {homeTeamName}
+                      <span
+                        className={`block text-xl font-medium md:text-2xl ${
+                          hasPhoto ? 'text-white/60' : 'text-ink-muted'
+                        }`}
+                      >
+                        v
+                      </span>
+                      {awayTeamName}
+                    </h1>
+
+                    <div
+                      className={`mt-6 flex flex-wrap gap-x-8 gap-y-3 ${
+                        hasPhoto ? 'text-white/90' : 'text-ink-soft'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <svg
+                          className="h-5 w-5 text-ink-muted"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                        <span>
+                          {formattedDate} · {formattedTime}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <svg
+                          className="h-5 w-5 text-ink-muted"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <span>
+                          {venue
+                            ? `${venue.name}${venue.city ? `, ${venue.city}` : ''}`
+                            : `Venue ${product.venue}`}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {stadium && (
+                  <p className="mt-2 px-2 text-xs text-ink-muted">
+                    Photo: {stadium.credit} ({stadium.license}), via Wikimedia
+                    Commons
+                  </p>
+                )}
               </div>
-              <div className="flex items-center gap-2">
-                <svg
-                  className="h-5 w-5 text-ink-muted"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <span>
-                  {venue
-                    ? `${venue.name}${venue.city ? `, ${venue.city}` : ''}`
-                    : `Venue ${product.venue}`}
-                </span>
-              </div>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* Interactive seat map: real seating_plan data when the API
               provides it, else the prototype SVG for demo venues */}
@@ -311,7 +359,7 @@ export function EventDetailPage() {
                       data-ticket-category={ticket.ticket_category}
                       className={`rounded-2xl border p-4 transition-colors ${
                         selected
-                          ? 'border-pitch-500 bg-pitch-50/50'
+                          ? 'border-ocean-500 bg-ocean-50/50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -331,7 +379,7 @@ export function EventDetailPage() {
                             £{ticket.price.toFixed(2)}
                           </p>
                         </div>
-                        <span className="chip bg-pitch-50 text-pitch-700">
+                        <span className="chip bg-ocean-50 text-ocean-700">
                           Available
                         </span>
                       </div>
@@ -355,7 +403,9 @@ export function EventDetailPage() {
                           className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm font-semibold focus:border-ink focus:outline-none"
                         >
                           {Array.from(
-                            { length: Math.min(ticket.max_purchase_qty, 10) + 1 },
+                            {
+                              length: Math.min(ticket.max_purchase_qty, 10) + 1,
+                            },
                             (_, i) => i
                           ).map((qty) => (
                             <option key={qty} value={qty}>
@@ -387,7 +437,10 @@ export function EventDetailPage() {
                   <span>Total</span>
                   <span>£{totalPrice.toFixed(2)}</span>
                 </div>
-                <button onClick={handleAddToCart} className="btn-primary mt-5 w-full">
+                <button
+                  onClick={handleAddToCart}
+                  className="btn-primary mt-5 w-full"
+                >
                   Add to cart
                 </button>
               </div>

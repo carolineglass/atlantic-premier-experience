@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 
 /**
  * Fixture filter state lives in URL search params so filtered views are
- * shareable: ?competition=<id>&team=<id>&month=YYYY-MM
+ * shareable: ?competition=<id>&team=<id>&month=YYYY-MM&q=<text>
  */
 export function useFixtureFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +14,7 @@ export function useFixtureFilters() {
     ? Number(searchParams.get('team'))
     : undefined;
   const month = searchParams.get('month') ?? undefined;
+  const query = searchParams.get('q') ?? '';
 
   const setFilter = (key: string, value: string | undefined) => {
     setSearchParams(
@@ -32,7 +33,15 @@ export function useFixtureFilters() {
 
   const clearAll = () => setSearchParams({}, { replace: true });
 
-  const hasFilters = Boolean(competitionId || teamId || month);
+  const hasFilters = Boolean(competitionId || teamId || month || query);
 
-  return { competitionId, teamId, month, setFilter, clearAll, hasFilters };
+  return {
+    competitionId,
+    teamId,
+    month,
+    query,
+    setFilter,
+    clearAll,
+    hasFilters,
+  };
 }

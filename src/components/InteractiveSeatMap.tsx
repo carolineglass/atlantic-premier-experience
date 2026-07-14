@@ -172,7 +172,7 @@ export function InteractiveSeatMap({
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="font-display text-2xl font-bold">Pick your zone</h2>
         {isPrototypeData && (
-          <span className="chip bg-amber-50 text-amber-700">
+          <span className="chip bg-gold-50 text-gold-700">
             Prototype — demo zone mapping
           </span>
         )}
