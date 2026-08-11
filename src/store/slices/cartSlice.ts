@@ -1,34 +1,53 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { OrderConfirmation } from '@/types/booking';
 
 /**
- * Shopping cart slice for managing ticket selections and checkout
+ * Shopping cart backed by TC reservations: whenever items change, a
+ * reservation is (re)created via useReservationSync to hold the tickets
+ * until expires_at. Confirming the reservation at checkout places the
+ * booking.
  */
 
 export interface CartItem {
   productId: number;
-  eventName: string; // e.g., "Manchester United vs Liverpool"
-  eventDate: string; // ISO string
-  seatSection: string;
+  /** Unique per ticket category — the cart line key */
+  ticketOptionId: number;
+  eventName: string;
+  /** ISO string of kickoff, for display */
+  eventDate: string;
+  /** Event URL slug for linking back */
+  slug: string;
+  ticketName: string;
+  price: number;
+  currency: string;
   quantity: number;
-  pricePerTicket: number;
-  slug: string; // For navigation back to event
+  maxQty: number;
+  /** Needed for the direct-order fallback (see reservations.ts) */
+  deliveryMethodId: number;
 }
 
-interface CartState {
+export type ReservationStatus = 'holding' | 'syncing' | 'expired' | 'error';
+
+export interface ReservationState {
+  number: string | null;
+  /** UNIX epoch seconds */
+  expiresAt: number | null;
+  /** Server-priced total for the held tickets */
+  priceTotal: number | null;
+  status: ReservationStatus;
+  errorMessage?: string;
+}
+
+export interface CartState {
   items: CartItem[];
-  total: number;
+  reservation: ReservationState | null;
+  lastOrder: OrderConfirmation | null;
 }
 
 const initialState: CartState = {
   items: [],
-  total: 0,
-};
-
-/**
- * Calculate total from cart items
- */
-const calculateTotal = (items: CartItem[]): number => {
-  return items.reduce((sum, item) => sum + item.pricePerTicket * item.quantity, 0);
+  reservation: null,
+  lastOrder: null,
 };
 
 const cartSlice = createSlice({
@@ -36,70 +55,110 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      const existingItem = state.items.find(
-        (item) =>
-          item.productId === action.payload.productId &&
-          item.seatSection === action.payload.seatSection
+      const existing = state.items.find(
+        (item) => item.ticketOptionId === action.payload.ticketOptionId
       );
-
-      if (existingItem) {
-        // Update quantity if same product and section
-        existingItem.quantity += action.payload.quantity;
+      if (existing) {
+        existing.quantity = Math.min(
+          existing.quantity + action.payload.quantity,
+          existing.maxQty
+        );
       } else {
-        // Add new item
         state.items.push(action.payload);
       }
-
-      state.total = calculateTotal(state.items);
     },
 
-    removeFromCart: (
-      state,
-      action: PayloadAction<{ productId: number; seatSection: string }>
-    ) => {
+    removeFromCart: (state, action: PayloadAction<{ ticketOptionId: number }>) => {
       state.items = state.items.filter(
-        (item) =>
-          !(
-            item.productId === action.payload.productId &&
-            item.seatSection === action.payload.seatSection
-          )
+        (item) => item.ticketOptionId !== action.payload.ticketOptionId
       );
-      state.total = calculateTotal(state.items);
     },
 
     updateQuantity: (
       state,
-      action: PayloadAction<{ productId: number; seatSection: string; quantity: number }>
+      action: PayloadAction<{ ticketOptionId: number; quantity: number }>
     ) => {
       const item = state.items.find(
-        (item) =>
-          item.productId === action.payload.productId &&
-          item.seatSection === action.payload.seatSection
+        (i) => i.ticketOptionId === action.payload.ticketOptionId
       );
-
-      if (item) {
-        if (action.payload.quantity <= 0) {
-          // Remove if quantity is 0 or negative
-          state.items = state.items.filter(
-            (i) =>
-              !(
-                i.productId === action.payload.productId &&
-                i.seatSection === action.payload.seatSection
-              )
-          );
-        } else {
-          item.quantity = action.payload.quantity;
-        }
-        state.total = calculateTotal(state.items);
+      if (!item) return;
+      if (action.payload.quantity <= 0) {
+        state.items = state.items.filter(
+          (i) => i.ticketOptionId !== action.payload.ticketOptionId
+        );
+      } else {
+        item.quantity = Math.min(action.payload.quantity, item.maxQty);
       }
     },
 
     clearCart: (state) => {
       state.items = [];
-      state.total = 0;
+      state.reservation = null;
+    },
+
+    reservationSyncStarted: (state) => {
+      state.reservation = {
+        number: state.reservation?.number ?? null,
+        expiresAt: state.reservation?.expiresAt ?? null,
+        priceTotal: state.reservation?.priceTotal ?? null,
+        status: 'syncing',
+      };
+    },
+
+    reservationSecured: (
+      state,
+      action: PayloadAction<{
+        number: string;
+        expiresAt: number;
+        priceTotal: number;
+      }>
+    ) => {
+      state.reservation = {
+        number: action.payload.number,
+        expiresAt: action.payload.expiresAt,
+        priceTotal: action.payload.priceTotal,
+        status: 'holding',
+      };
+    },
+
+    reservationExpired: (state) => {
+      if (state.reservation) {
+        state.reservation.status = 'expired';
+        state.reservation.number = null;
+      }
+    },
+
+    reservationFailed: (state, action: PayloadAction<string>) => {
+      state.reservation = {
+        number: null,
+        expiresAt: null,
+        priceTotal: null,
+        status: 'error',
+        errorMessage: action.payload,
+      };
+    },
+
+    orderPlaced: (state, action: PayloadAction<OrderConfirmation>) => {
+      state.lastOrder = action.payload;
+      // The reservation is consumed by the confirm call
+      state.items = [];
+      state.reservation = null;
     },
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const cartTotal = (items: CartItem[]): number =>
+  items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+export const {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+  reservationSyncStarted,
+  reservationSecured,
+  reservationExpired,
+  reservationFailed,
+  orderPlaced,
+} = cartSlice.actions;
 export default cartSlice.reducer;

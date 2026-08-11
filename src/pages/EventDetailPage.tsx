@@ -11,6 +11,8 @@ import { SeatingChart } from '@/components/SeatingChart';
 import { InteractiveSeatMap } from '@/components/InteractiveSeatMap';
 import { getAccent } from '@/utils/accentColors';
 import { getStadiumImage } from '@/utils/stadiumImages';
+import { useAppDispatch } from '@/store/hooks';
+import { addToCart } from '@/store/slices/cartSlice';
 
 // TODO(production): remove this prototype gate before deploying to production.
 // The sandbox API returns empty seating_plan for every product, so Celtic Park
@@ -39,6 +41,8 @@ export function EventDetailPage() {
   const [selectedTickets, setSelectedTickets] = useState<
     Record<number, number>
   >({});
+  const [addedFeedback, setAddedFeedback] = useState(false);
+  const dispatch = useAppDispatch();
 
   // Clicking a seat-map zone jumps to (and briefly highlights) its ticket card
   const scrollToCategory = useCallback((categoryId: number) => {
@@ -122,11 +126,30 @@ export function EventDetailPage() {
   );
 
   const handleAddToCart = () => {
-    // TODO: Implement cart functionality
-    console.log('Adding to cart:', selectedTickets);
-    alert(
-      `Added ${totalItems} ticket(s) to cart. Total: £${totalPrice.toFixed(2)}`
-    );
+    for (const [ticketIdStr, quantity] of Object.entries(selectedTickets)) {
+      const ticket = availableTickets.find(
+        (t) => t.id === parseInt(ticketIdStr, 10)
+      );
+      if (!ticket || quantity <= 0) continue;
+      dispatch(
+        addToCart({
+          productId: product.id,
+          ticketOptionId: ticket.id,
+          eventName: `${homeTeamName} v ${awayTeamName}`,
+          eventDate: product.match.start.local,
+          slug: product.slug,
+          ticketName: ticket.name,
+          price: ticket.price,
+          currency: 'GBP',
+          quantity,
+          maxQty: Math.min(ticket.max_purchase_qty, 10),
+          deliveryMethodId: ticket.delivery_methods[0],
+        })
+      );
+    }
+    setSelectedTickets({});
+    setAddedFeedback(true);
+    setTimeout(() => setAddedFeedback(false), 2500);
   };
 
   return (
@@ -446,9 +469,16 @@ export function EventDetailPage() {
               </div>
             )}
 
-            {!isSoldOut && totalItems === 0 && (
+            {!isSoldOut && totalItems === 0 && !addedFeedback && (
               <p className="mt-6 text-center text-sm text-ink-muted">
                 Select ticket quantities above
+              </p>
+            )}
+
+            {addedFeedback && (
+              <p className="mt-6 text-center text-sm font-semibold text-ocean-600">
+                Added — your tickets are being held. Open the cart to check
+                out.
               </p>
             )}
           </div>

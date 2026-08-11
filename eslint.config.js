@@ -9,6 +9,10 @@ export default [
   { ignores: ['dist'] },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { globals: globals.browser } },
+  {
+    files: ['scripts/**'],
+    languageOptions: { globals: { ...globals.node } },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   prettierConfig,

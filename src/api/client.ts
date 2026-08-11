@@ -103,6 +103,26 @@ class ApiClient {
       throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
     }
 
+    // No body to parse (e.g. DELETE returning 204) — nothing further to check
+    if (response.status === 204) {
+      return undefined as T;
+    }
+
+    // Some invalid requests get redirected (followed automatically by
+    // fetch) to the API's HTML documentation instead of returning a normal
+    // 4xx — response.ok is true by this point, so this is the only signal
+    const contentType = response.headers.get('content-type') ?? '';
+    if (!contentType.includes('application/json')) {
+      const text = await response.text();
+      console.error(
+        `Unexpected non-JSON response (redirected?) for ${endpoint}:`,
+        text.slice(0, 200)
+      );
+      throw new Error(
+        `Request to ${endpoint} was rejected (redirected to documentation) — check the request payload`
+      );
+    }
+
     return response.json();
   }
 
@@ -132,6 +152,22 @@ class ApiClient {
       method: 'PUT',
       body: JSON.stringify(data),
     });
+  }
+
+  async patch<T>(
+    endpoint: string,
+    data: unknown,
+    options?: RequestConfig
+  ): Promise<T> {
+    return this.request<T>(endpoint, {
+      ...options,
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async delete<T>(endpoint: string, options?: RequestConfig): Promise<T> {
+    return this.request<T>(endpoint, { ...options, method: 'DELETE' });
   }
 }
 

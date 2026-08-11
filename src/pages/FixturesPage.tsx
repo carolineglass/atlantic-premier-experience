@@ -28,7 +28,6 @@ export function FixturesPage() {
   const [searchText, setSearchText] = useState(query);
   useEffect(() => {
     setSearchText(query);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
   useEffect(() => {
     if (searchText === query) return;

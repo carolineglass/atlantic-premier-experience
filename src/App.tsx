@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useAutoProductSync, useStoredProducts } from './hooks/useProductSync';
 import { useAutoInventorySync } from './hooks/useInventory';
 import { useStaticData } from './hooks/useStaticData';
+import { useReservationSync } from './hooks/useReservationSync';
 import {
   filterUpcomingMatches,
   sortByKickoff,
@@ -11,6 +12,8 @@ import { PageLayout } from './components/PageLayout';
 import { HomePage } from './pages/HomePage';
 import { FixturesPage } from './pages/FixturesPage';
 import { EventDetailPage } from './pages/EventDetailPage';
+import { CheckoutPage } from './pages/CheckoutPage';
+import { CheckoutSuccessPage } from './pages/CheckoutSuccessPage';
 import { CreditsPage } from './pages/CreditsPage';
 
 /**
@@ -25,6 +28,9 @@ function AppContent() {
 
   // Start automatic background syncing for products (hourly)
   useAutoProductSync();
+
+  // Keep the TC reservation in lockstep with the cart (ticket holds)
+  useReservationSync();
 
   // Determine which products to sync inventory for based on current route.
   // Listing pages show "from £X" prices, so their visible products need
@@ -61,6 +67,8 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/fixtures" element={<FixturesPage />} />
         <Route path="/event/:id/:slug" element={<EventDetailPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
         <Route path="/credits" element={<CreditsPage />} />
       </Routes>
     </PageLayout>

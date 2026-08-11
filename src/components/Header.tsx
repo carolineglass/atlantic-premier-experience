@@ -1,14 +1,47 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAppSelector } from '@/store/hooks';
 import {
   CompetitionsMenu,
   MobileCompetitions,
 } from './CompetitionsMenu';
+import { CartDrawer } from './CartDrawer';
 
 const NAV_ITEMS = [{ to: '/fixtures', label: 'Fixtures' }];
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const itemCount = useAppSelector((state) =>
+    state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
+
+  const cartButton = (
+    <button
+      onClick={() => setCartOpen(true)}
+      className="relative flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-100"
+      aria-label={`Open cart (${itemCount} tickets)`}
+    >
+      <svg
+        className="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.6a1 1 0 00.9 1.4h12.4M16 21a1 1 0 100-2 1 1 0 000 2zm-8 0a1 1 0 100-2 1 1 0 000 2z"
+        />
+      </svg>
+      {itemCount > 0 && (
+        <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-tangerine-500 px-1 text-xs font-bold text-white">
+          {itemCount}
+        </span>
+      )}
+    </button>
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur">
@@ -59,11 +92,14 @@ export function Header() {
             </svg>
             Find tickets
           </Link>
+          {cartButton}
         </nav>
 
-        {/* Mobile menu button */}
+        {/* Mobile: cart + menu buttons */}
+        <div className="flex items-center gap-1 sm:hidden">
+        {cartButton}
         <button
-          className="rounded-full p-2 hover:bg-gray-100 sm:hidden"
+          className="rounded-full p-2 hover:bg-gray-100"
           onClick={() => setMenuOpen((open) => !open)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
@@ -91,6 +127,7 @@ export function Header() {
             )}
           </svg>
         </button>
+        </div>
       </div>
 
       {/* Mobile nav */}
@@ -113,6 +150,8 @@ export function Header() {
           <MobileCompetitions onNavigate={() => setMenuOpen(false)} />
         </nav>
       )}
+
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </header>
   );
 }
